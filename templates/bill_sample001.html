@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <title>A4 1ページのhtml</title>
+        <style>
+            * { margin: 0; padding: 0; box-sizing: border-box;}
+            body {font-size: 12px;}
+            section.page {
+                width: 210mm;
+                height: 297mm;
+                padding: 20mm;
+            }
+            h1 {display: block; text-align: center;}
+            div.header100 {
+                margin-top: 20mm;
+                display: flex; flex-direction: row; justify-content: space-between;}
+            div.header110 {display: flex; flex-direction: column;}
+            p.right-align {text-align: right;}
+            p.bill-dist {font-size: larger;}
+            p.bill-dist::after {content: "御中";}
+            div.bill-contents {
+                margin-top: 10mm;
+                display: flex; flex-direction: row; justify-content: space-between;}
+            div.bill-contents > div:first-child > p:first-child {
+                margin-bottom: 2mm;
+            }
+            div.bill-contents > div:nth-child(2) {margin-right: 25mm;}
+            div.bill-contents-left10 {display: flex; flex-direction: row;}
+            p.title01+p {padding-left: 0.5em;}
+            div.bill-contents-left10:not(first-child) {margin-bottom: 1mm;}
+            p.title01 {
+                color: white; background-color: black; font-weight: bolder;
+                width: 6em; text-align: center;}
+            div.bill-amount {
+                height: 4em; display: flex; flex-direction: row;}
+            div.bill-amount p {line-height: 4em;}
+            div.bill-amount11 {
+                border: 1px solid black; width: 20em;
+                height: 4em; display: flex; flex-direction: row;}
+            div.bill-amount11 > p:nth-child(1) {padding-left: 0.5em; line-height: 2.5em; font-size: large;}
+            div.bill-detail-header {
+                margin-top: 10mm;
+                display: flex; flex-direction: row;}
+            div.bill-detail-header > p {
+                height: 2em; line-height: 2em;
+                color: white; background-color: black; font-weight: bolder; text-align: center;}
+            div.bill-detail-header > p:nth-child(1), div.bill-detail > p:nth-child(1) {flex-grow: 1;}
+            div.bill-detail-header > p:nth-child(2), div.bill-detail > p:nth-child(2) {width: 5em;}
+            div.bill-detail-header > p:nth-child(3), div.bill-detail > p:nth-child(3) {width: 5em;}
+            div.bill-detail-header > p:nth-child(4), div.bill-detail > p:nth-child(4) {width: 8em;}
+            div.bill-detail-header > p:nth-child(5), div.bill-detail > p:nth-child(5) {width: 8em;}
+            div.bill-detail {display: flex; flex-direction: row;}
+            div.bill-detail > p:not(:last-child) {
+                height: 3em; border-left: 1px solid black; border-bottom: 1px solid black;}
+            div.bill-detail > p:last-child {
+                height: 3em; border-left: 1px solid black; border-bottom: 1px solid black; border-right: 1px solid black;}
+            div.bill-list-sum {display: flex; flex-direction: row;}
+            div.bill-list-sum > p:nth-child(1) {flex-grow: 1;}
+            div.bill-list-sum > p:nth-child(2) {width: 8em; color: white; background-color: black; font-weight: bolder; text-align: center;}
+            div.bill-list-sum > p:nth-child(3) {width: 8em;}
+            p.tel::before {content: "TEL：";}
+            p.doc-no::before {content: "No : ";}
+            p.woker::before {content: "担当：";}
+            p.postal-code::before {content: "〒";}
+            div.supplier > p:not(:first-child) {padding-left: 1em;}
+        </style>
+    </head>
+    <body>
+        <section class="page">
+            <h1>請求書</h1>
+            <div class="header100">
+                <div>
+                     <p class="bill-dist">{{ data.data11 }}&nbsp;</p>
+                </div>
+                <div class="header110">
+                    <p class="right-align doc-no">{{ data.data12 }}</p>
+                    <p>請求日 {{ data.data13 }}</p>
+                </div>
+            </div>
+            <div class="bill-contents">
+                <div>
+                    <p>以下のとおり、御請求申し上げます。</p>
+                    <div class="bill-contents-left10">
+                        <p class="title01">件名</p>
+                        <p>{{ data.data15 }}</p>
+                    </div>
+                    <div class="bill-contents-left10">
+                        <p class="title01">支払期限</p>
+                        <p>{{ data.data14 }}</p>
+                    </div>
+                    <div class="bill-contents-left10">
+                        <p class="title01">振込先</p>
+                        <p>{{ data.data31 }} {{ data.data32 }}<br/>{{ data.data33 }} {{ data.data34 }}</p>
+                    </div>
+                </div>
+                <div class="supplier">
+                    <p>{{ data.data21 }}</p>
+                    <p class="postal-code">{{ data.data22 }}</p>
+                    <p>{{ data.data23 }}</p>
+                    <p>{{ data.data24 }}</p>
+                    <p>{{ data.data25 }}</p>
+                    <p class="tel">{{ data.data26 }}</p>
+                    <p class="woker">{{ data.data27 }}</p>
+                </div>
+            </div>
+            <div class="bill-amount">
+                <p class="title01">合計金額</p>
+                <div class="bill-amount11">
+                    <p>540,000</p>
+                    <p>&nbsp;円</p>
+                    <p>（税込）</p>
+                </div>
+            </div>
+            <div class="bill-detail-header">
+                <p>摘要</p>
+                <p>数量</p>
+                <p>単位</p>
+                <p>単価</p>
+                <p>金額</p>
+            </div>
+            <div class="bill-detail">
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+            </div>
+            <div class="bill-detail">
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+            </div>
+            <div class="bill-detail">
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+            </div>
+            <div class="bill-detail">
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+            </div>
+            <div class="bill-list-sum">
+                <p></p>
+                <p>小計</p>
+                <p></p>
+            </div>
+            <div class="bill-list-sum bill-tax">
+                <p></p>
+                <p>消費税</p>
+                <p></p>
+            </div>
+            <div class="bill-list-sum bill-total">
+                <p></p>
+                <p>合計</p>
+                <p></p>
+            </div>
+        </section>
+    </body>
+</html>

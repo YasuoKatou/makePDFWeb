@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <title>請求書サンプル 001</title>
+        <style>
+            * { margin: 0; padding: 0; box-sizing: border-box;}
+            body {font-size: 12px;}
+            form {display: flex; flex-direction: column;}
+            div.form-data {display: flex; flex-direction: row;}
+            label.group-title {font-weight: bolder; color: blue;}
+            div.data-group1, div.data-group2, div.data-group3 {margin-top: 2em;}
+            div.form-data:not(:first-child) {margin-top: 0.5em;}
+            div.form-data > label {width: 8em; text-align: right; margin-right: 1em;}
+            div.ope_buttons {margin-top: 2em; display: flex; flex-direction: row; justify-content: center;}
+            div.ope_buttons > input {width: 6em;}
+            p.spacer1 {width: 2em;}
+        </style>
+    </head>
+    <body>
+        <h3>請求書サンプル 001 入力フォーム</h3>
+        <form method="post" action="/b001/preview">
+            <div class="data-group2">
+                <div class="form-data">
+                    <label class="group-title">発行者情報</label>
+                </div>
+                <div class="form-data">
+                    <label for="data21">請求者名</label><input type="text" id="data21" name="data21">
+                </div>
+                <div class="form-data">
+                    <label for="data22">郵便番号</label><input type="text" id="data22" name="data22">
+                </div>
+                <div class="form-data">
+                    <label for="data23">住所１</label><input type="text" id="data23" name="data23">
+                </div>
+                <div class="form-data">
+                    <label for="data24">住所２</label><input type="text" id="data24" name="data24">
+                </div>
+                <div class="form-data">
+                    <label for="data25">住所３</label><input type="text" id="data25" name="data25">
+                </div>
+                <div class="form-data">
+                    <label for="data26">電話番号</label><input type="tel" id="data26" name="data26" pattern="[0-9]+-[0-9]+-[0-9]+">
+                </div>
+                <div class="form-data">
+                    <label for="data27">担当</label><input type="text" id="data27" name="data27">
+                </div>
+            </div>
+            <div class="data-group3">
+                <div class="form-data">
+                    <label class="group-title">振込先情報</label>
+                </div>
+                <div class="form-data">
+                    <label for="data31">金融機関名</label><input type="text" id="data31" name="data31">
+                </div>
+                <div class="form-data">
+                    <label for="data32">支店名</label><input type="text" id="data32" name="data32">
+                </div>
+                <div class="form-data">
+                    <label for="data33">口座種別</label>
+                    <select id="data33" name="data33">
+                        <option value="普通" selected>普通</option>
+                        <option value="当座">当座</option>
+                        <option value="総合">総合</option>
+                    </select>
+                </div>
+                <div class="form-data">
+                    <label for="data34">口座番号</label><input type="text" id="data34" name="data34">
+                </div>
+            </div>
+            <div class="data-group1">
+                <div class="form-data">
+                    <label class="group-title">請求情報</label>
+                </div>
+                <div class="form-data">
+                    <label for="data11">請求先</label><input type="text" id="data11" name="data11">
+                </div>
+                <div class="form-data">
+                    <label for="data12">請求No</label><input type="text" id="data12" name="data12">
+                </div>
+                <div class="form-data">
+                    <label for="data13">請求日</label><input type="date" id="data13" name="data13">
+                </div>
+                <div class="form-data">
+                    <label for="data14">支払期限</label><input type="date" id="data14" name="data14">
+                </div>
+                <div class="form-data">
+                    <label for="data15">件名</label><input type="text" id="data15" name="data15">
+                </div>    
+            </div>
+            <div class="ope_buttons">
+                <input type="submit" value="プレビュー"/>
+                <p class="spacer1"></p>
+                <input type="reset" value="クリア"/>
+            </div>
+        </form>
+        <script type="text/javascript">
+            window.onload = function() {
+                var today = new Date();
+                document.getElementById('data13').value = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+            }
+        </script>
+    </body>
+</html>
