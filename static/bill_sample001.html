@@ -6,14 +6,38 @@
             * { margin: 0; padding: 0; box-sizing: border-box;}
             body {font-size: 12px;}
             form {display: flex; flex-direction: column;}
-            div.form-data {display: flex; flex-direction: row;}
+            div.form-data, div.form-data2 {display: flex; flex-direction: row;}
             label.group-title {font-weight: bolder; color: blue;}
-            div.data-group1, div.data-group2, div.data-group3 {margin-top: 2em;}
-            div.form-data:not(:first-child) {margin-top: 0.5em;}
-            div.form-data > label {width: 8em; text-align: right; margin-right: 1em;}
+            div.data-group1, div.data-group2, div.data-group3, div.bill-details {margin-top: 2em;}
+            div.form-data:not(:first-child), div.form-data2:not(:first-child) {margin-top: 0.5em;}
+            div.form-data > label, div.form-data2 > label:first-child {width: 8em; text-align: right; margin-right: 1em;}
             div.ope_buttons {margin-top: 2em; display: flex; flex-direction: row; justify-content: center;}
             div.ope_buttons > input {width: 6em;}
             p.spacer1 {width: 2em;}
+            div.form-data2 > input {margin-right: 0.5em;}
+            div.form-data2 > input+label {width: 6em;}
+            div.detail-title {margin-top: 0.5em;}
+            div.detail-title, div.detail-data {margin-left: 9em; display: flex; flex-direction: row;}
+            div.detail-title > p {font-weight: bold; text-align: center;}
+            div.detail-title > p:nth-child(1) {width: 3em;}
+            div.detail-title > p:nth-child(2) {width: 20em;}
+            div.detail-title > p:nth-child(3) {width: 5em;}
+            div.detail-title > p:nth-child(4) {width: 5em;}
+            div.detail-title > p:nth-child(5) {width: 5em;}
+            div.detail-title > p:nth-child(6) {width: 8em;}
+            div.detail-title > p:nth-child(7), div.totals input {width: 8em;}
+            div.detail-title > p:not(:last-child) {border-left: 1px solid black; border-bottom: 1px solid black; border-top: 1px solid black;}
+            div.detail-title > p:last-child {border: 1px solid black;}
+            div.detail-data > p {text-align: center; border: 1px solid black;}
+            div.detail-data > p:nth-child(1) {width: 3em; font-size: 12px;}
+            div.detail-data > input:nth-child(2) {width: 20em; font-size: 12px;}
+            div.detail-data > input:nth-child(3) {width: 5em; font-size: 12px;}
+            div.detail-data > input:nth-child(4) {width: 5em; font-size: 12px;}
+            div.detail-data > select {width: 5em; font-size: 12px;}
+            div.detail-data > input:nth-child(6) {width: 8em; font-size: 12px;}
+            div.detail-data > input:nth-child(7) {width: 8em; font-size: 12px;}
+            div.totals {margin-left: 46em; margin-top: 0.5em;}
+            div.totals input {font-size: 12px;}
         </style>
     </head>
     <body>
@@ -70,7 +94,7 @@
             <div class="data-group1">
                 <div class="form-data">
                     <label class="group-title">請求情報</label>
-                </div>
+                </div>  
                 <div class="form-data">
                     <label for="data11">請求先</label><input type="text" id="data11" name="data11">
                 </div>
@@ -85,7 +109,184 @@
                 </div>
                 <div class="form-data">
                     <label for="data15">件名</label><input type="text" id="data15" name="data15">
-                </div>    
+                </div>
+            </div>
+            <div class="bill-details">
+                <div class="form-data">
+                    <label class="group-title">請求書明細</label>
+                </div>
+                <div class="form-data2">
+                    <label>消費税計算</label>
+                    <input type="radio" id="calc-by-total" name="tax-calc" value="by-total" checked/> <label for="calc-by-total">総額</label>
+                    <input type="radio" id="calc-pile-up"  name="tax-calc" value="pile-up"/> <label for="calc-pile-up">積上げ</label>
+                </div>
+                <div class="form-data2">
+                    <label>税込／税抜</label>
+                    <input type="radio" id="with-tax"    name="tax-inc" value="include" checked/> <label for="with-tax">税込み</label>
+                    <input type="radio" id="without-tax" name="tax-inc" value="without"/> <label for="without-tax">税抜き</label>
+                </div>
+                <div class="form-data2">
+                    <label>税の端数処理</label>
+                    <input type="radio" id="flac-round-off" name="tax-flaction" value="round-off" checked/> <label for="flac-round-off">四捨五入</label>
+                    <input type="radio" id="flac-roud-up"   name="tax-flaction" value="roud-up"/> <label for="flac-roud-up">切上げ</label>
+                    <input type="radio" id="flac-truncate"  name="tax-flaction" value="truncate"/> <label for="flac-truncate">切捨て</label>
+                </div>
+                <div class="detail-title">
+                    <p>No.</p>
+                    <p>摘要</p>
+                    <p>数量</p>
+                    <p>単位</p>
+                    <p>税率</p>
+                    <p>単価</p>
+                    <p>金額</p>
+                </div>
+                <div class="detail-data">
+                    <p>1</p>
+                    <input type="text" name="detail-name">
+                    <input type="text" name="detail-number">
+                    <input type="text" name="detail-unit-type">
+                    <select name="tax-rate" id="tax-selector-01">
+                        <option value="none"></option>
+                        <option value="10">10%</option>
+                        <option value="8">8%</option>
+                    </select>
+                    <input type="text" name="detail-unit-amount">
+                    <input type="text" name="detail-amount" readonly>
+                </div>
+                <div class="detail-data">
+                    <p>2</p>
+                    <input type="text" name="detail-name">
+                    <input type="text" name="detail-number">
+                    <input type="text" name="detail-unit-type">
+                    <select name="tax-rate" id="tax-selector-02">
+                        <option value="none"></option>
+                        <option value="10">10%</option>
+                        <option value="8">8%</option>
+                    </select>
+                    <input type="text" name="detail-unit-amount">
+                    <input type="text" name="detail-amount" readonly>
+                </div>
+                <div class="detail-data">
+                    <p>3</p>
+                    <input type="text" name="detail-name">
+                    <input type="text" name="detail-number">
+                    <input type="text" name="detail-unit-type">
+                    <select name="tax-rate" id="tax-selector-03">
+                        <option value="none"></option>
+                        <option value="10">10%</option>
+                        <option value="8">8%</option>
+                    </select>
+                    <input type="text" name="detail-unit-amount">
+                    <input type="text" name="detail-amount" readonly>
+                </div>
+                <div class="detail-data">
+                    <p>4</p>
+                    <input type="text" name="detail-name">
+                    <input type="text" name="detail-number">
+                    <input type="text" name="detail-unit-type">
+                    <select name="tax-rate" id="tax-selector-04">
+                        <option value="none"></option>
+                        <option value="10">10%</option>
+                        <option value="8">8%</option>
+                    </select>
+                    <input type="text" name="detail-unit-amount">
+                    <input type="text" name="detail-amount" readonly>
+                </div>
+                <div class="detail-data">
+                    <p>5</p>
+                    <input type="text" name="detail-name">
+                    <input type="text" name="detail-number">
+                    <input type="text" name="detail-unit-type">
+                    <select name="tax-rate" id="tax-selector-05">
+                        <option value="none"></option>
+                        <option value="10">10%</option>
+                        <option value="8">8%</option>
+                    </select>
+                    <input type="text" name="detail-unit-amount">
+                    <input type="text" name="detail-amount" readonly>
+                </div>
+                <div class="detail-data">
+                    <p>6</p>
+                    <input type="text" name="detail-name">
+                    <input type="text" name="detail-number">
+                    <input type="text" name="detail-unit-type">
+                    <select name="tax-rate" id="tax-selector-06">
+                        <option value="none"></option>
+                        <option value="10">10%</option>
+                        <option value="8">8%</option>
+                    </select>
+                    <input type="text" name="detail-unit-amount">
+                    <input type="text" name="detail-amount" readonly>
+                </div>
+                <div class="detail-data">
+                    <p>7</p>
+                    <input type="text" name="detail-name">
+                    <input type="text" name="detail-number">
+                    <input type="text" name="detail-unit-type">
+                    <select name="tax-rate" id="tax-selector-07">
+                        <option value="none"></option>
+                        <option value="10">10%</option>
+                        <option value="8">8%</option>
+                    </select>
+                    <input type="text" name="detail-unit-amount">
+                    <input type="text" name="detail-amount" readonly>
+                </div>
+                <div class="detail-data">
+                    <p>8</p>
+                    <input type="text" name="detail-name">
+                    <input type="text" name="detail-number">
+                    <input type="text" name="detail-unit-type">
+                    <select name="tax-rate" id="tax-selector-08">
+                        <option value="none"></option>
+                        <option value="10">10%</option>
+                        <option value="8">8%</option>
+                    </select>
+                    <input type="text" name="detail-unit-amount">
+                    <input type="text" name="detail-amount" readonly>
+                </div>
+                <div class="detail-data">
+                    <p>9</p>
+                    <input type="text" name="detail-name">
+                    <input type="text" name="detail-number">
+                    <input type="text" name="detail-unit-type">
+                    <select name="tax-rate" id="tax-selector-09">
+                        <option value="none"></option>
+                        <option value="10">10%</option>
+                        <option value="8">8%</option>
+                    </select>
+                    <input type="text" name="detail-unit-amount">
+                    <input type="text" name="detail-amount" readonly>
+                </div>
+                <div class="detail-data">
+                    <p>10</p>
+                    <input type="text" name="detail-name">
+                    <input type="text" name="detail-number">
+                    <input type="text" name="detail-unit-type">
+                    <select name="tax-rate" id="tax-selector-10">
+                        <option value="none"></option>
+                        <option value="10">10%</option>
+                        <option value="8">8%</option>
+                    </select>
+                    <input type="text" name="detail-unit-amount">
+                    <input type="text" name="detail-amount" readonly>
+                </div>
+            </div>
+            <div class="totals">
+                <div class="form-data">
+                    <label for="total10">小計(10%)</label><input type="text" id="total10" name="total10" />
+                </div>
+                <div class="form-data">
+                    <label for="total8">小計(8%)</label><input type="text" id="total8" name="total8" />
+                </div>
+                <div class="form-data">
+                    <label for="tax10">税額(10%)</label><input type="text" id="tax10" name="tax10" />
+                </div>
+                <div class="form-data">
+                    <label for="tax8">税額(8%)</label><input type="text" id="tax8" name="tax8" />
+                </div>
+                <div class="form-data">
+                    <label for="total">合計</label><input type="text" id="total" name="total" />
+                </div>
             </div>
             <div class="ope_buttons">
                 <input type="submit" value="プレビュー"/>
@@ -94,9 +295,118 @@
             </div>
         </form>
         <script type="text/javascript">
+            let _tax_info = {'tax-calc': 'by-total', 'tax-inc': 'include', 'tax-flaction': 'round-off'}
+
+            function _getTaxRate(ownerDiv) {
+                var elements = ownerDiv.getElementsByName('tax-rate');
+                if (elements.length === 1) {
+                    return parseInt(elements[0].value);
+                }
+            }
+
+            /**
+             * 税率が同じ金額を集計する。
+             * @param tax_rate 税率(8, 10)
+             * @return 合計金額
+             */
+            function _addAmountByTax(tax_rate) {
+                let total = 0;
+                let count = 0;
+                try {
+                    for (divElm in document.getElementsByClassName('detail-data')) {
+                        if (_getTaxRate(divElm) !== tax_rate) continue;
+                        for (amount in divElm.getElementsByName('detail-amount')) {
+                            total += parseInt(amount.value);
+                            ++count;
+                        }
+                    }
+                    if (count > 0) return total;
+                    return null;
+                } catch (ex) {
+                    alert('税率での集計 : ' + ex);
+                }
+            }
+            function _calcTotal() {
+                try {
+                    let total = _addAmountByTax(10);
+                    let element = document.getElementById('total10');
+                    element.value = (total !== null ? String(total) : '');
+
+                    total = _addAmountByTax(8);
+                    element = document.getElementById('total8');
+                    element.value = (total !== null ? String(total) : '');
+                } catch (ex) {
+                    alert('合計計算 : ' + ex);
+                }
+            }
+            /**
+             * 金額を計算する。
+             * @param target 入力を行ったエレメント
+             * @param isNum  数量の入力の場合、true
+             */
+            function _calcAmount(target, isNum) {
+                try {
+                    // 入力を行った要素の値を取得
+                    var v1s = target.value;
+                    if (isNaN(v1s) || v1s.length < 1) return;
+                    var v1 = parseInt(v1s);
+                    var elm;
+                    var v2s;
+                    if (isNum) {
+                        // 数量の入力の場合、単価の入力要素を決定
+                        elm = target.nextElementSibling.nextElementSibling;
+                        // 単価を取得
+                        v2s = elm.value;
+                    } else {
+                        // 金額の入力を行った場合、数量の入力要素を決定
+                        elm = target;
+                        // 数量を取得
+                        v2s = target.previousElementSibling.previousElementSibling.value;
+                    }
+                    if (isNaN(v2s) || v2s.length < 1) return;
+                    var v2 = parseInt(v2s);
+                    // 金額の入力要素を決定
+                    var v3e = elm.nextElementSibling;
+                    // 金額を設定
+                    v3e.value = String(v1 * v2);
+                    // alert(v1 * v2 + '');
+                } catch(ex) {
+                    alert('金額計算 : ' + ex);
+                }
+            }
             window.onload = function() {
                 var today = new Date();
                 document.getElementById('data13').value = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+
+                document.getElementsByName('detail-number').forEach(elmt => {
+                    elmt.addEventListener('blur', (event) => {
+                        _calcAmount(event.target, true);
+                    });
+                });
+                // 消費税計算（総額／積上げ）
+                document.getElementsByName('tax-calc').forEach(elmt => {
+                    elmt.addEventListener('click', (event) => {
+                        _tax_info['tax-calc'] = event.target.value;
+                    });
+                });
+                // 税込／税抜
+                document.getElementsByName('tax-inc').forEach(elmt => {
+                    elmt.addEventListener('click', (event) => {
+                        _tax_info['tax-inc'] = event.target.value;
+                    });
+                });
+                // 端数処理（四捨五入／切上げ／切捨て）
+                document.getElementsByName('tax-flaction').forEach(elmt => {
+                    elmt.addEventListener('click', (event) => {
+                        _tax_info['tax-flaction'] = event.target.value;
+                    });
+                });
+
+                document.getElementsByName('detail-unit-amount').forEach(elmt => {
+                    elmt.addEventListener('blur', (event) => {
+                        _calcAmount(event.target, false);
+                    });
+                });
             }
         </script>
     </body>

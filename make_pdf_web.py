@@ -14,7 +14,9 @@ def b001():
 def b001_preview():
     #for key, val in request.form.items():
     #    print('{}: {}'.format(key, val))
-    return render_template('bill_sample001.html', data=request.form)
+    r = render_template('bill_sample001.html', data=request.form)
+    #print(str(r))
+    return r
 
 if __name__ == '__main__':
     app.run(port=8891, debug=True)
