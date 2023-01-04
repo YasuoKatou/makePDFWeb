@@ -340,8 +340,15 @@
                     element.value = '';
                     return null;
                 }
-                let tax = total - total / ((100.0 + taxRate) / 100.0);
-                element.value = String(_taxFlaction(tax));
+                let tax = 0;
+                if (_tax_info['tax-inc'] === 'include') {           // 税込単価
+                    tax = total - total / ((100.0 + taxRate) / 100.0);
+                } else if (_tax_info['tax-inc'] === 'without') {    // 税抜単価
+                    tax = total * taxRate / 100.0;
+                }
+                tax = _taxFlaction(tax);
+                element.value = String(tax);
+                return tax;
             }
             function _totalByTaxRate(taxRate) {
                 let total = _addAmountByTax(taxRate);
@@ -355,8 +362,9 @@
                     let total = 0;
                     for (taxRate of taxRateList) {
                         let a = _totalByTaxRate(taxRate);
-                        _taxByTotal(a, taxRate);
                         if (a !== null) total += a;
+                        let tax = _taxByTotal(a, taxRate);
+                        if ((tax !== null) && (_tax_info['tax-inc'] === 'without'))  total += tax;
                     }
                     let element = document.getElementById('total');
                     element.value = String(total);
