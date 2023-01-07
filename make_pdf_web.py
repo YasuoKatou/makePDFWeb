@@ -12,8 +12,8 @@ def b001():
 
 @app.route('/b001/preview', methods=['POST'])
 def b001_preview():
-    #for key, val in request.form.items():
-    #    print('{}: {}'.format(key, val))
+    for key, val in request.form.items():
+        print('{}: {}'.format(key, val))
     r = render_template('bill_sample001.html', data=request.form)
     #print(str(r))
     return r
