@@ -49,15 +49,24 @@
             div.bill-detail-header > p:nth-child(3), div.bill-detail > p:nth-child(3) {width: 5em;}
             div.bill-detail-header > p:nth-child(4), div.bill-detail > p:nth-child(4) {width: 8em;}
             div.bill-detail-header > p:nth-child(5), div.bill-detail > p:nth-child(5) {width: 8em;}
+            div.bill-detail > p:nth-child(1) {text-align: left; padding-left: 1em;}
+            div.bill-detail > p:nth-child(2) {text-align: right; padding-right: 1em;}
+            div.bill-detail > p:nth-child(3) {text-align: center;}
+            div.bill-detail > p:nth-child(4) {text-align: right; padding-right: 1em;}
+            div.bill-detail > p:nth-child(5) {text-align: right; padding-right: 1em;}
             div.bill-detail {display: flex; flex-direction: row;}
             div.bill-detail > p:not(:last-child) {
                 height: 3em; border-left: 1px solid black; border-bottom: 1px solid black;}
             div.bill-detail > p:last-child {
                 height: 3em; border-left: 1px solid black; border-bottom: 1px solid black; border-right: 1px solid black;}
+            div.bill-detail > p {line-height: 3.2em;}
             div.bill-list-sum {display: flex; flex-direction: row;}
+            div.bill-list-sum > p {height: 2em; line-height: 2.2em;}
+            div.bill-list-sum > p:not(:first-child) {border-bottom: 1px solid black; border-right: 1px solid black;}
             div.bill-list-sum > p:nth-child(1) {flex-grow: 1;}
-            div.bill-list-sum > p:nth-child(2) {width: 8em; color: white; background-color: black; font-weight: bolder; text-align: center;}
-            div.bill-list-sum > p:nth-child(3) {width: 8em;}
+            div.bill-list-sum > p:nth-child(2) {width: 8em; color: white; background-color: black; font-weight: bolder;
+                 text-align: right; padding-right: 1em;}
+            div.bill-list-sum > p:nth-child(3) {width: 8em; text-align: right; padding-right: 1em;}
             p.tel::before {content: "TEL：";}
             p.doc-no::before {content: "No : ";}
             p.woker::before {content: "担当：";}
@@ -106,7 +115,7 @@
             <div class="bill-amount">
                 <p class="title01">合計金額</p>
                 <div class="bill-amount11">
-                    <p>{{ data.total }}</p>
+                    <p>{{ format_currency(data.total) }}</p>
                     <p>&nbsp;円</p>
                     <p>（税込）</p>
                 </div>
@@ -118,90 +127,39 @@
                 <p>単価</p>
                 <p>金額</p>
             </div>
+            {% for detail in data.details %}
             <div class="bill-detail">
-                <p>{{ data.details[0].name }}</p>
-                <p>{{ data.details[0].number }}</p>
-                <p>{{ data.details[0].unit_type }}</p>
-                <p>{{ data.details[0].unit_amount }}</p>
-                <p>{{ data.details[0].amount }}</p>
+                <p>{{ detail.name }}</p>
+                <p>{{ format_currency(detail.number) }}</p>
+                <p>{{ detail.unit_type }}</p>
+                <p>{{ format_currency(detail.unit_amount) }}</p>
+                <p>{{ format_currency(detail.amount) }}</p>
             </div>
-            <div class="bill-detail">
-                <p>{{ data.details[1].name }}</p>
-                <p>{{ data.details[1].number }}</p>
-                <p>{{ data.details[1].unit_type }}</p>
-                <p>{{ data.details[1].unit_amount }}</p>
-                <p>{{ data.details[1].amount }}</p>
-            </div>
-            <div class="bill-detail">
-                <p>{{ data.details[2].name }}</p>
-                <p>{{ data.details[2].number }}</p>
-                <p>{{ data.details[2].unit_type }}</p>
-                <p>{{ data.details[2].unit_amount }}</p>
-                <p>{{ data.details[2].amount }}</p>
-            </div>
-            <div class="bill-detail">
-                <p>{{ data.details[3].name }}</p>
-                <p>{{ data.details[3].number }}</p>
-                <p>{{ data.details[3].unit_type }}</p>
-                <p>{{ data.details[3].unit_amount }}</p>
-                <p>{{ data.details[3].amount }}</p>
-            </div>
-            <div class="bill-detail">
-                <p>{{ data.details[4].name }}</p>
-                <p>{{ data.details[4].number }}</p>
-                <p>{{ data.details[4].unit_type }}</p>
-                <p>{{ data.details[4].unit_amount }}</p>
-                <p>{{ data.details[4].amount }}</p>
-            </div>
-            <div class="bill-detail">
-                <p>{{ data.details[5].name }}</p>
-                <p>{{ data.details[5].number }}</p>
-                <p>{{ data.details[5].unit_type }}</p>
-                <p>{{ data.details[5].unit_amount }}</p>
-                <p>{{ data.details[5].amount }}</p>
-            </div>
-            <div class="bill-detail">
-                <p>{{ data.details[6].name }}</p>
-                <p>{{ data.details[6].number }}</p>
-                <p>{{ data.details[6].unit_type }}</p>
-                <p>{{ data.details[6].unit_amount }}</p>
-                <p>{{ data.details[6].amount }}</p>
-            </div>
-            <div class="bill-detail">
-                <p>{{ data.details[7].name }}</p>
-                <p>{{ data.details[7].number }}</p>
-                <p>{{ data.details[7].unit_type }}</p>
-                <p>{{ data.details[7].unit_amount }}</p>
-                <p>{{ data.details[7].amount }}</p>
-            </div>
-            <div class="bill-detail">
-                <p>{{ data.details[8].name }}</p>
-                <p>{{ data.details[8].number }}</p>
-                <p>{{ data.details[8].unit_type }}</p>
-                <p>{{ data.details[8].unit_amount }}</p>
-                <p>{{ data.details[8].amount }}</p>
-            </div>
-            <div class="bill-detail">
-                <p>{{ data.details[9].name }}</p>
-                <p>{{ data.details[9].number }}</p>
-                <p>{{ data.details[9].unit_type }}</p>
-                <p>{{ data.details[9].unit_amount }}</p>
-                <p>{{ data.details[9].amount }}</p>
+            {% endfor %}
+            <div class="bill-list-sum">
+                <p></p>
+                <p>小計(10%)</p>
+                <p>{{ format_currency(data.total10) }}</p>
             </div>
             <div class="bill-list-sum">
                 <p></p>
-                <p>小計</p>
-                <p>{{ data.total10 }}</p>
+                <p>小計(8%)</p>
+                <p>{{ format_currency(data.total8) }}</p>
             </div>
-            <div class="bill-list-sum bill-tax">
+            <div class="bill-list-sum">
                 <p></p>
-                <p>消費税</p>
-                <p>{{ data.tax10 }}</p>
+                <p>消費税(10%)</p>
+                <p>{{ format_currency(data.tax10) }}</p>
             </div>
-            <div class="bill-list-sum bill-total">
+            <div class="bill-list-sum">
+                <p></p>
+                <p>消費税(8%)</p>
+                <p>{{ format_currency(data.tax8) }}</p>
+            </div>
+            <div class="bill-list-sum">
                 <p></p>
                 <p>合計</p>
-                <p>{{ data.total }}</p>
+                <p>{{ format_currency(data.total) }}</p>
             </div>
         </section>
     </body>
