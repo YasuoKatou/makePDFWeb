@@ -106,7 +106,7 @@
             <div class="bill-amount">
                 <p class="title01">合計金額</p>
                 <div class="bill-amount11">
-                    <p>540,000</p>
+                    <p>{{ data.total }}</p>
                     <p>&nbsp;円</p>
                     <p>（税込）</p>
                 </div>
@@ -119,89 +119,89 @@
                 <p>金額</p>
             </div>
             <div class="bill-detail">
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
+                <p>{{ data.details[0].name }}</p>
+                <p>{{ data.details[0].number }}</p>
+                <p>{{ data.details[0].unit_type }}</p>
+                <p>{{ data.details[0].unit_amount }}</p>
+                <p>{{ data.details[0].amount }}</p>
             </div>
             <div class="bill-detail">
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
+                <p>{{ data.details[1].name }}</p>
+                <p>{{ data.details[1].number }}</p>
+                <p>{{ data.details[1].unit_type }}</p>
+                <p>{{ data.details[1].unit_amount }}</p>
+                <p>{{ data.details[1].amount }}</p>
             </div>
             <div class="bill-detail">
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
+                <p>{{ data.details[2].name }}</p>
+                <p>{{ data.details[2].number }}</p>
+                <p>{{ data.details[2].unit_type }}</p>
+                <p>{{ data.details[2].unit_amount }}</p>
+                <p>{{ data.details[2].amount }}</p>
             </div>
             <div class="bill-detail">
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
+                <p>{{ data.details[3].name }}</p>
+                <p>{{ data.details[3].number }}</p>
+                <p>{{ data.details[3].unit_type }}</p>
+                <p>{{ data.details[3].unit_amount }}</p>
+                <p>{{ data.details[3].amount }}</p>
             </div>
             <div class="bill-detail">
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
+                <p>{{ data.details[4].name }}</p>
+                <p>{{ data.details[4].number }}</p>
+                <p>{{ data.details[4].unit_type }}</p>
+                <p>{{ data.details[4].unit_amount }}</p>
+                <p>{{ data.details[4].amount }}</p>
             </div>
             <div class="bill-detail">
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
+                <p>{{ data.details[5].name }}</p>
+                <p>{{ data.details[5].number }}</p>
+                <p>{{ data.details[5].unit_type }}</p>
+                <p>{{ data.details[5].unit_amount }}</p>
+                <p>{{ data.details[5].amount }}</p>
             </div>
             <div class="bill-detail">
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
+                <p>{{ data.details[6].name }}</p>
+                <p>{{ data.details[6].number }}</p>
+                <p>{{ data.details[6].unit_type }}</p>
+                <p>{{ data.details[6].unit_amount }}</p>
+                <p>{{ data.details[6].amount }}</p>
             </div>
             <div class="bill-detail">
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
+                <p>{{ data.details[7].name }}</p>
+                <p>{{ data.details[7].number }}</p>
+                <p>{{ data.details[7].unit_type }}</p>
+                <p>{{ data.details[7].unit_amount }}</p>
+                <p>{{ data.details[7].amount }}</p>
             </div>
             <div class="bill-detail">
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
+                <p>{{ data.details[8].name }}</p>
+                <p>{{ data.details[8].number }}</p>
+                <p>{{ data.details[8].unit_type }}</p>
+                <p>{{ data.details[8].unit_amount }}</p>
+                <p>{{ data.details[8].amount }}</p>
             </div>
             <div class="bill-detail">
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
+                <p>{{ data.details[9].name }}</p>
+                <p>{{ data.details[9].number }}</p>
+                <p>{{ data.details[9].unit_type }}</p>
+                <p>{{ data.details[9].unit_amount }}</p>
+                <p>{{ data.details[9].amount }}</p>
             </div>
             <div class="bill-list-sum">
                 <p></p>
                 <p>小計</p>
-                <p></p>
+                <p>{{ data.total10 }}</p>
             </div>
             <div class="bill-list-sum bill-tax">
                 <p></p>
                 <p>消費税</p>
-                <p></p>
+                <p>{{ data.tax10 }}</p>
             </div>
             <div class="bill-list-sum bill-total">
                 <p></p>
                 <p>合計</p>
-                <p></p>
+                <p>{{ data.total }}</p>
             </div>
         </section>
     </body>
