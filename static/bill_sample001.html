@@ -296,7 +296,12 @@
         </form>
         <script type="text/javascript">
             let _tax_info = {'tax-calc': 'by-total', 'tax-inc': 'include', 'tax-flaction': 'round-off'}
-
+            function _isNumber(value) {
+                if (typeof value === "string" || value instanceof String) {
+                    if (value.trim() === '') return false;
+                }
+                return !isNaN(value);
+            }
             /**
              * 税率が同じ金額を集計する。
              * @param tax_rate 税率(8, 10)
@@ -313,6 +318,7 @@
                         if (taxElm === null) continue;
                         if (parseInt(taxElm.value) !== tax_rate) continue;
                         var amount = _getDetailAmountElement(divElm);
+                        if (!_isNumber(amount.value)) continue;
                         total += parseInt(amount.value);
                         ++count;
                     }
@@ -397,7 +403,7 @@
                 try {
                     // 入力を行った要素の値を取得
                     let v1s = target.value;
-                    if (isNaN(v1s) || v1s.length < 1) return;
+                    if (!_isNumber(v1s)) return;
                     let v1 = parseInt(v1s);
                     let elm;
                     let parent = target.parentNode;
@@ -407,7 +413,7 @@
                         elm = _getDetailNumberElement(parent);
                     }
                     let v2s = elm.value;
-                    if (isNaN(v2s) || v2s.length < 1) return;
+                    if (!_isNumber(v2s)) return;
                     let v2 = parseInt(v2s);
                     // 金額の入力要素を決定
                     var v3e = _getDetailAmountElement(parent);
