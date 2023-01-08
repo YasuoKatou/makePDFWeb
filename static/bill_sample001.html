@@ -9,7 +9,7 @@
             input[type=number] {text-align: right;}
             div.form-data, div.form-data2 {display: flex; flex-direction: row;}
             label.group-title {font-weight: bolder; color: blue;}
-            div.data-group1, div.data-group2, div.data-group3, div.bill-details {margin-top: 2em;}
+            div.data-group1, div.data-group2, div.data-group3, div#bill-details {margin-top: 2em;}
             div.form-data:not(:first-child), div.form-data2:not(:first-child) {margin-top: 0.5em;}
             div.form-data > label, div.form-data2 > label:first-child {width: 8em; text-align: right; margin-right: 1em;}
             div.ope_buttons {margin-top: 2em; display: flex; flex-direction: row; justify-content: center;}
@@ -112,7 +112,7 @@
                     <label for="data15">件名</label><input type="text" id="data15" name="data15">
                 </div>
             </div>
-            <div class="bill-details">
+            <div id="bill-details">
                 <div class="form-data">
                     <label class="group-title">請求書明細</label>
                 </div>
@@ -140,136 +140,6 @@
                     <p>税率</p>
                     <p>単価</p>
                     <p>金額</p>
-                </div>
-                <div class="detail-data">
-                    <p>1</p>
-                    <input type="text" name="details[0][name]">
-                    <input type="number" name="details[0][number]" class="detail-number">
-                    <input type="text" name="details[0][unit_type]">
-                    <select name="details[0][tax-rate]" class="tax-rate" id="tax-selector-01">
-                        <option value="none"></option>
-                        <option value="10">10%</option>
-                        <option value="8">8%</option>
-                    </select>
-                    <input type="number" name="details[0][unit_amount]" class="detail-unit-amount">
-                    <input type="number" name="details[0][amount]" class="detail-amount" readonly>
-                </div>
-                <div class="detail-data">
-                    <p>2</p>
-                    <input type="text" name="details[1][name]">
-                    <input type="number" name="details[1][number]" class="detail-number">
-                    <input type="text" name="details[1][unit_type]">
-                    <select name="details[1][tax-rate]" class="tax-rate" id="tax-selector-02">
-                        <option value="none"></option>
-                        <option value="10">10%</option>
-                        <option value="8">8%</option>
-                    </select>
-                    <input type="number" name="details[1][unit_amount]" class="detail-unit-amount">
-                    <input type="number" name="details[1][amount]" class="detail-amount" readonly>
-                </div>
-                <div class="detail-data">
-                    <p>3</p>
-                    <input type="text" name="details[2][name]">
-                    <input type="number" name="details[2][number]" class="detail-number">
-                    <input type="text" name="details[2][unit_type]">
-                    <select name="details[2][tax-rate]" class="tax-rate" id="tax-selector-03">
-                        <option value="none"></option>
-                        <option value="10">10%</option>
-                        <option value="8">8%</option>
-                    </select>
-                    <input type="number" name="details[2][unit_amount]" class="detail-unit-amount">
-                    <input type="number" name="details[2][amount]" class="detail-amount" readonly>
-                </div>
-                <div class="detail-data">
-                    <p>4</p>
-                    <input type="text" name="details[3][name]">
-                    <input type="number" name="details[3][number]" class="detail-number">
-                    <input type="text" name="details[3][unit_type]">
-                    <select name="details[3][tax-rate]" class="tax-rate" id="tax-selector-04">
-                        <option value="none"></option>
-                        <option value="10">10%</option>
-                        <option value="8">8%</option>
-                    </select>
-                    <input type="number" name="details[3][unit_amount]" class="detail-unit-amount">
-                    <input type="number" name="details[3][amount]" class="detail-amount" readonly>
-                </div>
-                <div class="detail-data">
-                    <p>5</p>
-                    <input type="text" name="details[4][name]">
-                    <input type="number" name="details[4][number]" class="detail-number">
-                    <input type="text" name="details[4][unit_type]">
-                    <select name="details[4][tax-rate]" class="tax-rate" id="tax-selector-05">
-                        <option value="none"></option>
-                        <option value="10">10%</option>
-                        <option value="8">8%</option>
-                    </select>
-                    <input type="number" name="details[4][unit_amount]" class="detail-unit-amount">
-                    <input type="number" name="details[4][amount]" class="detail-amount" readonly>
-                </div>
-                <div class="detail-data">
-                    <p>6</p>
-                    <input type="text" name="details[5][name]">
-                    <input type="number" name="details[5][number]" class="detail-number">
-                    <input type="text" name="details[5][unit_type]">
-                    <select name="details[5][tax-rate]" class="tax-rate" id="tax-selector-06">
-                        <option value="none"></option>
-                        <option value="10">10%</option>
-                        <option value="8">8%</option>
-                    </select>
-                    <input type="number" name="details[5][unit_amount]" class="detail-unit-amount">
-                    <input type="number" name="details[5][amount]" class="detail-amount" readonly>
-                </div>
-                <div class="detail-data">
-                    <p>7</p>
-                    <input type="text" name="details[6][name]">
-                    <input type="number" name="details[6][number]" class="detail-number">
-                    <input type="text" name="details[6][unit_type]">
-                    <select name="details[6][tax-rate]" class="tax-rate" id="tax-selector-07">
-                        <option value="none"></option>
-                        <option value="10">10%</option>
-                        <option value="8">8%</option>
-                    </select>
-                    <input type="number" name="details[6][unit_amount]" class="detail-unit-amount">
-                    <input type="number" name="details[6][amount]" class="detail-amount" readonly>
-                </div>
-                <div class="detail-data">
-                    <p>8</p>
-                    <input type="text" name="details[7][name]">
-                    <input type="number" name="details[7][number]" class="detail-number">
-                    <input type="text" name="details[7][unit_type]">
-                    <select name="details[7][tax-rate]" class="tax-rate" id="tax-selector-08">
-                        <option value="none"></option>
-                        <option value="10">10%</option>
-                        <option value="8">8%</option>
-                    </select>
-                    <input type="number" name="details[7][unit_amount]" class="detail-unit-amount">
-                    <input type="number" name="details[7][amount]" class="detail-amount" readonly>
-                </div>
-                <div class="detail-data">
-                    <p>9</p>
-                    <input type="text" name="details[8][name]">
-                    <input type="number" name="details[8][number]" class="detail-number">
-                    <input type="text" name="details[8][unit_type]">
-                    <select name="details[8][tax-rate]" class="tax-rate" id="tax-selector-09">
-                        <option value="none"></option>
-                        <option value="10">10%</option>
-                        <option value="8">8%</option>
-                    </select>
-                    <input type="number" name="details[8][unit_amount]" class="detail-unit-amount">
-                    <input type="number" name="details[8][amount]" class="detail-amount" readonly>
-                </div>
-                <div class="detail-data">
-                    <p>10</p>
-                    <input type="text" name="details[9][name]">
-                    <input type="number" name="details[9][number]" class="detail-number">
-                    <input type="text" name="details[9][unit_type]">
-                    <select name="details[9][tax-rate]" class="tax-rate" id="tax-selector-10">
-                        <option value="none"></option>
-                        <option value="10">10%</option>
-                        <option value="8">8%</option>
-                    </select>
-                    <input type="number" name="details[9][unit_amount]" class="detail-unit-amount">
-                    <input type="number" name="details[9][amount]" class="detail-amount" readonly>
                 </div>
             </div>
             <div class="totals">
@@ -426,7 +296,73 @@
                     alert('金額計算 : ' + ex);
                 }
             }
+            function _createInputTag(type, name, className) {
+                let elmt = document.createElement('input');
+                elmt.type = type;
+                elmt.name = name;
+                if (className) elmt.classList.add(className);
+                return elmt;
+            }
+            function _createTaxSelectorTag(id, name) {
+                let selectTag = document.createElement('select');
+                selectTag.name = name;
+                selectTag.id = id;
+                selectTag.classList.add('tax-rate');
+
+                let opt = document.createElement('option');
+                opt.value = 'none';
+                opt.appendChild(document.createTextNode(''));
+                selectTag.appendChild(opt);
+
+                opt = document.createElement('option');
+                opt.value = '10';
+                opt.appendChild(document.createTextNode('10%'));
+                selectTag.appendChild(opt);
+
+                opt = document.createElement('option');
+                opt.value = '8';
+                opt.appendChild(document.createTextNode('8%'));
+                selectTag.appendChild(opt);
+
+                return selectTag;
+            }
+            function _makeDetailsTag() {
+                let parent = document.getElementById('bill-details');
+                for (let count = 1; count <= 10; ++count) {
+                    let row = document.createElement('div');
+                    row.classList.add('detail-data');
+                    parent.appendChild(row);
+                    // No
+                    let no = String(count);
+                    let elmt = document.createElement('p');
+                    elmt.appendChild(document.createTextNode(no));
+                    row.appendChild(elmt);
+                    let idxStr = String(count-1);
+                    // 適用
+                    let name = 'details[' + idxStr + '][name]';
+                    row.appendChild(_createInputTag("text", name, null));
+                    // 数量
+                    name = 'details[' + idxStr + '][number]';
+                    row.appendChild(_createInputTag("number", name, 'detail-number'));
+                    // 単位
+                    name = 'details[' + idxStr + '][unit_type]';
+                    row.appendChild(_createInputTag("text", name, null));
+                    // 税率
+                    let id = 'tax-selector-' + ('0' + no).slice(-2);
+                    name = 'details[' + idxStr + '][tax-rate]';
+                    row.appendChild(_createTaxSelectorTag(id, name));
+                    // 単価
+                    name = 'details[' + idxStr + '][unit_amount]';
+                    row.appendChild(_createInputTag("number", name, 'detail-unit-amount'));
+                    // 金額
+                    name = 'details[' + idxStr + '][amount]';
+                    elmt = _createInputTag("number", name, 'detail-amount');
+                    elmt.readOnly = true;
+                    row.appendChild(elmt);
+                }
+            }
             window.onload = function() {
+                _makeDetailsTag();
                 var today = new Date();
                 document.getElementById('data13').value =
                     today.getFullYear() + '-'
