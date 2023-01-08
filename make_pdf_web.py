@@ -1,8 +1,6 @@
-import locale
 import re
 from flask import Flask, request, render_template
 
-locale.setlocale(locale.LC_NUMERIC, 'ja_JP')
 app = Flask(__name__)
 
 @app.route('/')
@@ -34,7 +32,7 @@ def b001_preview():
 @app.context_processor
 def utility_processor():
     def format_currency(amount):
-        return locale.format('%d', int(amount), True) if amount else ''
+        return '{:,}'.format(int(amount)) if amount else ''
     return dict(format_currency=format_currency)
 
 if __name__ == '__main__':
