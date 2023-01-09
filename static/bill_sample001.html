@@ -13,8 +13,11 @@
             div.form-data:not(:first-child), div.form-data2:not(:first-child) {margin-top: 0.5em;}
             div.bill-summary > div {float: left;}
             div.form-data > label, div.form-data2 > label:first-child {width: 8em; text-align: right; margin-right: 1em;}
-            div.ope_buttons {margin-top: 2em; display: flex; flex-direction: row; justify-content: center;}
-            div.ope_buttons > input {width: 6em;}
+            div.ope_buttons {margin-top: 2em; margin-bottom: 2em;
+                display: flex; flex-direction: row; justify-content: center;}
+            div.ope_buttons > input[type=submit] {width: 6em;}
+            div.ope_buttons > input[type=reset] {width: 6em;}
+            div.ope_buttons > label {margin-left: 0.5em; margin-right: 2em;}
             p.spacer1 {width: 2em;}
             div.form-data2 > input {margin-right: 0.5em;}
             div.form-data2 > input+label {width: 6em;}
@@ -122,7 +125,8 @@
                 <div class="form-data2">
                     <label>消費税計算</label>
                     <input type="radio" id="calc-by-total" name="tax-calc" value="by-total" checked/> <label for="calc-by-total">総額</label>
-                    <input type="radio" id="calc-pile-up"  name="tax-calc" value="pile-up"/> <label for="calc-pile-up">積上げ</label>
+                    <input type="radio" id="calc-pile-up"  name="tax-calc" value="pile-up" disabled/> <label for="calc-pile-up">積上げ</label>
+                    <p>※「積上げ」は、工事中</p>
                 </div>
                 <div class="form-data2">
                     <label>単価</label>
@@ -163,7 +167,8 @@
                 </div>
             </div>
             <div class="ope_buttons">
-                <input type="submit" value="プレビュー"/>
+                <input type="checkbox" id="preview" name="preview" checked><label for="preview">プレビュー</label>
+                <input type="submit" value="PDF作成"/>
                 <p class="spacer1"></p>
                 <input type="reset" value="クリア"/>
             </div>
