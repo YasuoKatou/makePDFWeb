@@ -56,7 +56,9 @@ def b001_preview():
 def utility_processor():
     def format_currency(amount):
         return '{:,}'.format(int(amount)) if amount else ''
-    return dict(format_currency=format_currency)
+    def format_date(dt):
+        return dt.replace('-', '/')
+    return dict(format_currency=format_currency, format_date=format_date)
 
 if __name__ == '__main__':
     app.run(port=8891, debug=True)
