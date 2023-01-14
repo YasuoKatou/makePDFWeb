@@ -9,9 +9,9 @@ app = Flask(__name__)
 def index():
     return app.send_static_file('index.html')
 
-@app.route('/b001')
-def b001():
-    return app.send_static_file('bill_sample001.html')
+@app.route('/b<string:pid>')
+def b_pid(pid):
+    return app.send_static_file('bill_sample' + pid + '.html')
 
 def _makePDF(html):
     hp = Path('./tmp/test.html')
@@ -32,20 +32,23 @@ def _makePDF(html):
     return r
 
 _RE_DIM_CHECK_01 = re.compile(r'details\[(?P<index>\d+)\]\[(?P<key>\w+)+\]$')
-@app.route('/b001/preview', methods=['POST'])
-def b001_preview():
+@app.route('/b<string:pid>/preview', methods=['POST'])
+def b001_preview(pid):
     dm = {}
-    dm['details']= [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}]
+    dm['details']= []
     for key, val in request.form.items():
         m = _RE_DIM_CHECK_01.match(key)
         if m:
-            dm['details'][int(m.group('index'))][m.group('key')] = val
+            idx = int(m.group('index'))
+            if len(dm['details']) < (idx + 1):
+                dm['details'].append({})
+            dm['details'][idx][m.group('key')] = val
             #print('index: {}, key : {}'.format(m.group('index'), m.group('key')))
         else:
             dm[key] = val
             #print('{}: {}'.format(key, val))
 
-    r = render_template('bill_sample001.html', data=dm)
+    r = render_template('bill_sample' + pid + '.html', data=dm)
     #print(str(r))
     if 'preview' in dm:
         print('PDF : {}'.format(dm['preview']))

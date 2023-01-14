@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>請求書 001</title>
+        <style>
+            * { margin: 0; padding: 0; box-sizing: border-box;}
+            body {font-size: 12px;}
+            section.page {
+                width: 210mm;
+                height: 297mm;
+                padding: 20mm;
+            }
+            h1 {display: block; text-align: center; font-size: 15pt;}
+            div.header100 {
+                margin-top: 20mm;
+                display: flex; flex-direction: column; justify-content: space-between;}
+            div.header110 {display: flex; flex-direction: column; font-size: 10pt}
+            div.header110 > p {text-align: right;}
+            p.bill-dist {font-size: 12pt; text-decoration: underline;}
+            p.bill-dist::after {content: "御中";}
+            div.bill-contents {
+                margin-top: 20mm;
+                display: flex; flex-direction: row; justify-content: space-between;}
+            div.bill-contents > div:first-child > p:first-child {
+                margin-bottom: 2mm;
+            }
+            div.bill-contents-amount {border: 1px solid black;
+                display: flex; flex-direction: column; justify-content: space-between; padding: 0 1em 0 1em;
+            }
+            div.bill-contents-left10 {display: flex; flex-direction: row;}
+            p.title01 {width: 6em; text-align: right; font-size: 11pt;}
+            p.title02 {width: 6em; text-align: right; font-size: 11pt;}
+            p.title02+p {padding-left: 0.5em; width: 16em; font-size: 11pt; text-align: center;}
+            div.bill-contents-left10:not(first-child) {margin-bottom: 1mm;}
+            div.bill-amount {
+                height: 4em; display: flex; flex-direction: row;}
+            div.bill-amount p {line-height: 4em; font-size: 11pt;}
+            div.bill-amount11 {height: 4em; display: flex; flex-direction: row;}
+            div.bill-amount11 > p:nth-child(1) {padding-left: 0.5em; line-height: 2.7em; font-size: 16pt;}
+            div.bill-amount11 > p:nth-child(1)::after {content: " 円";}
+            div.exp01 > p:nth-child(1) {margin-top: 1em; font-size: 11pt;}
+            div.exp01 > p:nth-child(2) {margin-top: 5em; font-size: 12pt;}
+            div.bill-detail-header {display: flex; flex-direction: row; height: 40px;}
+            div.bill-detail-header > p {
+                height: 40px; line-height: 3em; font-size: 10pt;
+                font-weight: bolder; text-align: center;}
+            div.bill-detail {font-size: 10pt;}
+            div.bill-detail-header > p:not(:last-child) {border-color: black; border-style: solid; border-width: 1px 0px 1px 1px;}
+            div.bill-detail-header > p:last-child {border: 1px solid black;}
+            div.bill-detail-header > p:nth-child(1), div.bill-details > p:nth-child(1) {flex-grow: 1;}
+            div.bill-detail-header > p:nth-child(2), div.bill-details > p:nth-child(2) {width: 65px;}
+            div.bill-detail-header > p:nth-child(3), div.bill-details > p:nth-child(3) {width: 105px;}
+            div.bill-detail-header > p:nth-child(4), div.bill-details > p:nth-child(4) {width: 105px;}
+            div.bill-details {font-size: 11px; height: 38px;}
+            div.bill-details > p:nth-child(1) {text-align: left; padding-left: 1em;}
+            div.bill-details > p:nth-child(2) {text-align: right; padding-right: 1em;}
+            div.bill-details > p:nth-child(3) {text-align: right; padding-right: 1em;}
+            div.bill-details > p:nth-child(4) {text-align: right; padding-right: 1em;}
+            div.bill-details {display: flex; flex-direction: row;}
+            div.bill-details > p:not(:last-child) {
+                border-left: 1px solid black; border-bottom: 1px solid black;}
+            div.bill-details > p:last-child {
+                border-left: 1px solid black; border-bottom: 1px solid black; border-right: 1px solid black;}
+            div.bill-details > p {line-height: 3.2em;}
+            div.bill-list-sum {display: flex; flex-direction: row; height: 38px;}
+            div.bill-list-sum > p {line-height: 38px;}
+            div.bill-list-sum > p:nth-child(2) {border-left: 1px solid black; border-bottom: 1px solid black;}
+            div.bill-list-sum > p:nth-child(3) {border-color: black; border-style: solid; font-size: 11px; border-width: 0px 1px 1px 1px;}
+            div.bill-list-sum > p:nth-child(1) {flex-grow: 1;}
+            div.bill-list-sum > p:nth-child(2) {width: 105px; font-weight: bolder;
+                 text-align: center; padding-right: 1em;}
+            div.bill-list-sum > p:nth-child(3) {width: 105px; text-align: right; padding-right: 1em;}
+            p.tel::before {content: "TEL：";}
+            p.postal-code::before {content: "〒";}
+            div.supplier > p:nth-child(1) {font-size: 13pt;}
+            div.supplier > p:nth-child(2) {padding-left: 1em; font-size: 10.5pt;}
+            div.supplier > p:nth-child(3), div.supplier > p:nth-child(4) {padding-left: 2em; font-size: 10.5pt;}
+            div.bank {padding-top: 30mm; display: flex; flex-direction: row; justify-content: flex-end; font-size: 12pt;}
+            p.bank-info-title {padding-right: 2em;}
+        </style>
+    </head>
+    <body>
+        <section class="page">
+            <h1>ご 請 求 書</h1>
+            <div class="header100">
+                <div class="header110">
+                    <p>発行日 {{ format_date(data.data13) }}</p>
+                </div>
+                <div>
+                    <p class="bill-dist">{{ data.data11 }}&nbsp;</p>
+                </div>
+            </div>
+            <div class="bill-contents">
+                <div class="bill-contents-amount">
+                    <div class="bill-amount">
+                        <p class="title01">ご請求金額</p>
+                        <div class="bill-amount11">
+                            <p>{{ format_currency(data.total) }}</p>
+                            <p>（消費税込）</p>
+                        </div>
+                    </div>
+                    <div class="bill-contents-left10">
+                        <p class="title02">お支払い期日</p>
+                        <p>{{ format_date(data.data14) }}</p>
+                    </div>
+                </div>
+                <div class="supplier">
+                    <p>{{ data.data21 }}</p>
+                    <p class="postal-code">{{ data.data22 }}</p>
+                    <p>{{ data.data23 }}</p>
+                    <p class="tel">{{ data.data26 }}</p>
+                </div>
+            </div>
+            <div class="exp01">
+                <p>上記金額を下記内訳の通りご請求申し上げます。</p>
+                <p>【内　訳】</p>
+            </div>
+            <div class="bill-detail">
+                <div class="bill-detail-header">
+                    <p>品　　　名</p>
+                    <p>数　量</p>
+                    <p>単　価</p>
+                    <p>金　額</p>
+                </div>
+                {% for detail in data.details %}
+                <div class="bill-details">
+                    <p>{{ detail.name }}</p>
+                    <p>{{ format_currency(detail.number) }} {{ detail.unit_type }}</p>
+                    <p>{{ format_currency(detail.unit_amount) }}</p>
+                    <p>{{ format_currency(detail.amount) }}</p>
+                </div>
+                {% endfor %}
+                <div class="bill-list-sum">
+                    <p></p>
+                    <p>合　計</p>
+                    <p>{{ format_currency(data.total) }}</p>
+                </div>
+            </div>
+            <div class="bank">
+                <div>
+                    <p class="bank-info-title">お振込先</p>
+                </div>
+                <div>
+                    <p>{{ data.data31 }} {{ data.data32 }}</p>
+                    <p>{{ data.data33 }} {{ data.data34 }}</p>
+                    <p>{{ data.data21 }}</p>    
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

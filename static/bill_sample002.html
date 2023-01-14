@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <title>請求書サンプル 002</title>
+        <style>
+            * { margin: 0; padding: 0; box-sizing: border-box;}
+            body {font-size: 12px;}
+            form {display: flex; flex-direction: column;}
+            input[type=number] {text-align: right;}
+            div.form-data {display: flex; flex-direction: row;}
+            label.group-title {font-weight: bolder; color: blue;}
+            div.data-group1, div.data-group2, div.data-group3, div#bill-details {margin-top: 2em;}
+            div.form-data:not(:first-child) {margin-top: 0.5em;}
+            div.bill-summary > div {float: left;}
+            div.form-data > label {width: 8em; text-align: right; margin-right: 1em;}
+            div.ope_buttons {margin-top: 2em; margin-bottom: 2em;
+                display: flex; flex-direction: row; justify-content: center;}
+            div.ope_buttons > input[type=submit] {width: 6em;}
+            div.ope_buttons > input[type=reset] {width: 6em;}
+            div.ope_buttons > label {margin-left: 0.5em; margin-right: 2em;}
+            p.spacer1 {width: 2em;}
+            div.detail-title {margin-top: 0.5em;}
+            div.detail-title, div.detail-data {margin-left: 9em; display: flex; flex-direction: row;}
+            div.detail-title > p {font-weight: bold; text-align: center;}
+            div.detail-title > p:nth-child(1) {width: 3em;}
+            div.detail-title > p:nth-child(2) {width: 20em;}
+            div.detail-title > p:nth-child(3) {width: 5em;}
+            div.detail-title > p:nth-child(4) {width: 5em;}
+            div.detail-title > p:nth-child(5) {width: 8em;}
+            div.detail-title > p:nth-child(6), div.totals input {width: 8em;}
+            div.detail-title > p:not(:last-child) {border-left: 1px solid black; border-bottom: 1px solid black; border-top: 1px solid black;}
+            div.detail-title > p:last-child {border: 1px solid black;}
+            div.detail-data > p {text-align: center; border: 1px solid black;}
+            div.detail-data > p:nth-child(1) {width: 3em; font-size: 12px;}
+            div.detail-data > input:nth-child(2) {width: 20em; font-size: 12px;}
+            div.detail-data > input:nth-child(3) {width: 5em; font-size: 12px;}
+            div.detail-data > input:nth-child(4) {width: 5em; font-size: 12px; text-align: center;}
+            div.detail-data > select {width: 5em; font-size: 12px;}
+            div.detail-data > input:nth-child(5) {width: 8em; font-size: 12px;}
+            div.detail-data > input:nth-child(6) {width: 8em; font-size: 12px;}
+            div.totals {margin-left: 41em; margin-top: 0.5em;}
+            div.totals input {font-size: 12px;}
+        </style>
+    </head>
+    <body>
+        <h3>請求書サンプル 002 入力フォーム</h3>
+        <form method="post" action="/b002/preview">
+            <div class="bill-summary">
+                <div class="data-group2">
+                    <div class="form-data">
+                        <label class="group-title">発行者情報</label>
+                    </div>
+                    <div class="form-data">
+                        <label for="data21">請求者名</label><input type="text" id="data21" name="data21">
+                    </div>
+                    <div class="form-data">
+                        <label for="data22">郵便番号</label><input type="text" id="data22" name="data22">
+                    </div>
+                    <div class="form-data">
+                        <label for="data23">住　所</label><input type="text" id="data23" name="data23">
+                    </div>
+                    <div class="form-data">
+                        <label for="data26">電話番号</label><input type="tel" id="data26" name="data26" pattern="[0-9]+-[0-9]+-[0-9]+">
+                    </div>
+                </div>
+                <div class="data-group3">
+                    <div class="form-data">
+                        <label class="group-title">振込先情報</label>
+                    </div>
+                    <div class="form-data">
+                        <label for="data31">金融機関名</label><input type="text" id="data31" name="data31">
+                    </div>
+                    <div class="form-data">
+                        <label for="data32">支店名</label><input type="text" id="data32" name="data32">
+                    </div>
+                    <div class="form-data">
+                        <label for="data33">口座種別</label>
+                        <select id="data33" name="data33">
+                            <option value="普通" selected>普通</option>
+                            <option value="当座">当座</option>
+                            <option value="総合">総合</option>
+                        </select>
+                    </div>
+                    <div class="form-data">
+                        <label for="data34">口座番号</label><input type="text" id="data34" name="data34">
+                    </div>
+                </div>
+                <div class="data-group1">
+                    <div class="form-data">
+                        <label class="group-title">請求情報</label>
+                    </div>
+                    <div class="form-data">
+                        <label for="data11">請求先</label><input type="text" id="data11" name="data11">
+                    </div>
+                    <div class="form-data">
+                        <label for="data13">発行日</label><input type="date" id="data13" name="data13">
+                    </div>
+                    <div class="form-data">
+                        <label for="data14">支払期限</label><input type="date" id="data14" name="data14">
+                    </div>
+                </div>
+            </div>
+            <div id="bill-details">
+                <div class="form-data">
+                    <label class="group-title">請求書明細</label>
+                </div>
+                <div class="detail-title">
+                    <p>No.</p>
+                    <p>摘要</p>
+                    <p>数量</p>
+                    <p>単位</p>
+                    <p>単価</p>
+                    <p>金額</p>
+                </div>
+            </div>
+            <div class="totals">
+                <div class="form-data">
+                    <label for="total">合計</label><input type="number" id="total" name="total" readonly/>
+                </div>
+            </div>
+            <div class="ope_buttons">
+                <input type="checkbox" id="preview" name="preview" checked><label for="preview">プレビュー</label>
+                <input type="submit" value="PDF作成"/>
+                <p class="spacer1"></p>
+                <input type="reset" value="クリア"/>
+            </div>
+        </form>
+        <script type="text/javascript">
+            let _tax_info = {'tax-calc': 'by-total', 'tax-inc': 'include', 'tax-flaction': 'round-off'}
+            function _isNumber(value) {
+                if (typeof value === "string" || value instanceof String) {
+                    if (value.trim() === '') return false;
+                }
+                return !isNaN(value);
+            }
+            /**
+             * 金額を集計する。
+             * @return 合計金額
+             */
+            function _totalAmount() {
+                let total = 0;
+                let count = 0;
+                let elms = document.getElementsByClassName('detail-data');
+                try {
+                    for (var index = 0; index < elms.length; ++index) {
+                        var divElm = elms[index];
+                        var amount = _getDetailAmountElement(divElm);
+                        if (!_isNumber(amount.value)) continue;
+                        total += parseInt(amount.value);
+                        ++count;
+                    }
+                    let element = document.getElementById('total');
+                    if (count > 0) {
+                        element.value = String(total);
+                    } else {
+                        element.value = '';
+                    }
+                } catch (ex) {
+                    alert('合計計算 : ' + ex);
+                }
+            }
+            function _getDetailNumberElement(parent) {
+                let es = parent.getElementsByClassName('detail-number');
+                return es[0];
+            }
+            function _getDetailUnitAmountElement(parent) {
+                let es = parent.getElementsByClassName('detail-unit-amount');
+                return es[0];
+            }
+            function _getDetailAmountElement(parent) {
+                let es = parent.getElementsByClassName('detail-amount');
+                return es[0];
+            }
+            /**
+             * 金額を計算する。
+             * @param target 入力を行ったエレメント
+             * @param isNum  数量の入力の場合、true
+             */
+            function _calcAmount(target, isNum) {
+                try {
+                    // 入力を行った要素の値を取得
+                    let v1s = target.value;
+                    if (!_isNumber(v1s)) return;
+                    let v1 = parseInt(v1s);
+                    let elm;
+                    let parent = target.parentNode;
+                    if (isNum) {    // 数量の入力の場合、単価の入力要素を決定
+                        elm = _getDetailUnitAmountElement(parent);
+                    } else {        // 単価の入力を行った場合、数量の入力要素を決定
+                        elm = _getDetailNumberElement(parent);
+                    }
+                    let v2s = elm.value;
+                    if (!_isNumber(v2s)) return;
+                    let v2 = parseInt(v2s);
+                    // 金額の入力要素を決定
+                    var v3e = _getDetailAmountElement(parent);
+                    // 金額を設定
+                    v3e.value = String(v1 * v2);
+                    // alert(v1 * v2 + '');
+                    _totalAmount();       // 合計欄の更新
+                } catch(ex) {
+                    alert('金額計算 : ' + ex);
+                }
+            }
+            function _createInputTag(type, name, className) {
+                let elmt = document.createElement('input');
+                elmt.type = type;
+                elmt.name = name;
+                if (className) elmt.classList.add(className);
+                return elmt;
+            }
+            function _makeDetailsTag() {
+                let parent = document.getElementById('bill-details');
+                for (let count = 1; count <= 4; ++count) {
+                    let row = document.createElement('div');
+                    row.classList.add('detail-data');
+                    parent.appendChild(row);
+                    // No
+                    let no = String(count);
+                    let elmt = document.createElement('p');
+                    elmt.appendChild(document.createTextNode(no));
+                    row.appendChild(elmt);
+                    let idxStr = String(count-1);
+                    // 適用
+                    let name = 'details[' + idxStr + '][name]';
+                    row.appendChild(_createInputTag("text", name, null));
+                    // 数量
+                    name = 'details[' + idxStr + '][number]';
+                    row.appendChild(_createInputTag("number", name, 'detail-number'));
+                    // 単位
+                    name = 'details[' + idxStr + '][unit_type]';
+                    row.appendChild(_createInputTag("text", name, null));
+                    // 単価
+                    name = 'details[' + idxStr + '][unit_amount]';
+                    row.appendChild(_createInputTag("number", name, 'detail-unit-amount'));
+                    // 金額
+                    name = 'details[' + idxStr + '][amount]';
+                    elmt = _createInputTag("number", name, 'detail-amount');
+                    elmt.readOnly = true;
+                    row.appendChild(elmt);
+                }
+            }
+            window.onload = function() {
+                _makeDetailsTag();
+                var today = new Date();
+                document.getElementById('data13').value =
+                    today.getFullYear() + '-'
+                    + ('0' + (today.getMonth()+1)).slice(-2) + '-'
+                    + ('0' + today.getDate()).slice(-2);
+                // 数量
+                let elmts = document.getElementsByClassName('detail-number');
+                for (let idx = 0; idx < elmts.length; ++idx) {
+                    elmts[idx].addEventListener('blur', (event) => {
+                        _calcAmount(event.target, true);
+                    });
+                }
+                // 単価
+                elmts = document.getElementsByClassName('detail-unit-amount');
+                for (let idx = 0; idx < elmts.length; ++idx) {
+                    elmts[idx].addEventListener('blur', (event) => {
+                        _calcAmount(event.target, false);
+                    });
+                }
+                // 消費税計算（総額／積上げ）
+                document.getElementsByName('tax-calc').forEach(elmt => {
+                    elmt.addEventListener('click', (event) => {
+                        _tax_info['tax-calc'] = event.target.value;
+                    });
+                });
+                // 単価（税込／税抜）
+                document.getElementsByName('tax-inc').forEach(elmt => {
+                    elmt.addEventListener('click', (event) => {
+                        _tax_info['tax-inc'] = event.target.value;
+                    });
+                });
+                // 端数処理（四捨五入／切上げ／切捨て）
+                document.getElementsByName('tax-flaction').forEach(elmt => {
+                    elmt.addEventListener('click', (event) => {
+                        _tax_info['tax-flaction'] = event.target.value;
+                    });
+                });
+            }
+        </script>
+    </body>
+</html>
