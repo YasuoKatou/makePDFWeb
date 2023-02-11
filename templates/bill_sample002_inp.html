@@ -1,26 +1,24 @@
 <!DOCTYPE html>
 <html lang="ja">
     <head>
-        <title>請求書サンプル 001</title>
+        <title>請求書サンプル 002</title>
         <style>
             * { margin: 0; padding: 0; box-sizing: border-box;}
             body {font-size: 12px;}
             form {display: flex; flex-direction: column;}
             input[type=number] {text-align: right;}
-            div.form-data, div.form-data2 {display: flex; flex-direction: row;}
+            div.form-data {display: flex; flex-direction: row;}
             label.group-title {font-weight: bolder; color: blue;}
             div.data-group1, div.data-group2, div.data-group3, div#bill-details {margin-top: 2em;}
-            div.form-data:not(:first-child), div.form-data2:not(:first-child) {margin-top: 0.5em;}
+            div.form-data:not(:first-child) {margin-top: 0.5em;}
             div.bill-summary > div {float: left;}
-            div.form-data > label, div.form-data2 > label:first-child {width: 8em; text-align: right; margin-right: 1em;}
+            div.form-data > label {width: 8em; text-align: right; margin-right: 1em;}
             div.ope_buttons {margin-top: 2em; margin-bottom: 2em;
                 display: flex; flex-direction: row; justify-content: center;}
             div.ope_buttons > input[type=submit] {width: 6em;}
             div.ope_buttons > input[type=reset] {width: 6em;}
             div.ope_buttons > label {margin-left: 0.5em; margin-right: 2em;}
             p.spacer1 {width: 2em;}
-            div.form-data2 > input {margin-right: 0.5em;}
-            div.form-data2 > input+label {width: 6em;}
             div.detail-title {margin-top: 0.5em;}
             div.detail-title, div.detail-data {margin-left: 9em; display: flex; flex-direction: row;}
             div.detail-title > p {font-weight: bold; text-align: center;}
@@ -28,9 +26,8 @@
             div.detail-title > p:nth-child(2) {width: 20em;}
             div.detail-title > p:nth-child(3) {width: 5em;}
             div.detail-title > p:nth-child(4) {width: 5em;}
-            div.detail-title > p:nth-child(5) {width: 5em;}
-            div.detail-title > p:nth-child(6) {width: 8em;}
-            div.detail-title > p:nth-child(7), div.totals input {width: 8em;}
+            div.detail-title > p:nth-child(5) {width: 8em;}
+            div.detail-title > p:nth-child(6), div.totals input {width: 8em;}
             div.detail-title > p:not(:last-child) {border-left: 1px solid black; border-bottom: 1px solid black; border-top: 1px solid black;}
             div.detail-title > p:last-child {border: 1px solid black;}
             div.detail-data > p {text-align: center; border: 1px solid black;}
@@ -39,15 +36,15 @@
             div.detail-data > input:nth-child(3) {width: 5em; font-size: 12px;}
             div.detail-data > input:nth-child(4) {width: 5em; font-size: 12px; text-align: center;}
             div.detail-data > select {width: 5em; font-size: 12px;}
+            div.detail-data > input:nth-child(5) {width: 8em; font-size: 12px;}
             div.detail-data > input:nth-child(6) {width: 8em; font-size: 12px;}
-            div.detail-data > input:nth-child(7) {width: 8em; font-size: 12px;}
-            div.totals {margin-left: 46em; margin-top: 0.5em;}
+            div.totals {margin-left: 41em; margin-top: 0.5em;}
             div.totals input {font-size: 12px;}
         </style>
     </head>
     <body>
-        <h3>請求書サンプル 001 入力フォーム</h3>
-        <form method="post" action="/b001/preview">
+        <h3>請求書サンプル 002 入力フォーム</h3>
+        <form method="post" action="{{ data.request_uri }}/preview">
             <div class="bill-summary">
                 <div class="data-group2">
                     <div class="form-data">
@@ -60,19 +57,10 @@
                         <label for="data22">郵便番号</label><input type="text" id="data22" name="data22">
                     </div>
                     <div class="form-data">
-                        <label for="data23">住所１</label><input type="text" id="data23" name="data23">
-                    </div>
-                    <div class="form-data">
-                        <label for="data24">住所２</label><input type="text" id="data24" name="data24">
-                    </div>
-                    <div class="form-data">
-                        <label for="data25">住所３</label><input type="text" id="data25" name="data25">
+                        <label for="data23">住　所</label><input type="text" id="data23" name="data23">
                     </div>
                     <div class="form-data">
                         <label for="data26">電話番号</label><input type="tel" id="data26" name="data26" pattern="[0-9]+-[0-9]+-[0-9]+">
-                    </div>
-                    <div class="form-data">
-                        <label for="data27">担当</label><input type="text" id="data27" name="data27">
                     </div>
                 </div>
                 <div class="data-group3">
@@ -105,16 +93,10 @@
                         <label for="data11">請求先</label><input type="text" id="data11" name="data11">
                     </div>
                     <div class="form-data">
-                        <label for="data12">請求No</label><input type="text" id="data12" name="data12">
-                    </div>
-                    <div class="form-data">
-                        <label for="data13">請求日</label><input type="date" id="data13" name="data13">
+                        <label for="data13">発行日</label><input type="date" id="data13" name="data13">
                     </div>
                     <div class="form-data">
                         <label for="data14">支払期限</label><input type="date" id="data14" name="data14">
-                    </div>
-                    <div class="form-data">
-                        <label for="data15">件名</label><input type="text" id="data15" name="data15">
                     </div>
                 </div>
             </div>
@@ -122,46 +104,16 @@
                 <div class="form-data">
                     <label class="group-title">請求書明細</label>
                 </div>
-                <div class="form-data2">
-                    <label>消費税計算</label>
-                    <input type="radio" id="calc-by-total" name="tax-calc" value="by-total" checked/> <label for="calc-by-total">総額</label>
-                    <input type="radio" id="calc-pile-up"  name="tax-calc" value="pile-up" disabled/> <label for="calc-pile-up">積上げ</label>
-                    <p>※「積上げ」は、工事中</p>
-                </div>
-                <div class="form-data2">
-                    <label>単価</label>
-                    <input type="radio" id="with-tax"    name="tax-inc" value="include" checked/> <label for="with-tax">税込み</label>
-                    <input type="radio" id="without-tax" name="tax-inc" value="without"/> <label for="without-tax">税抜き</label>
-                </div>
-                <div class="form-data2">
-                    <label>税の端数処理</label>
-                    <input type="radio" id="flac-round-off" name="tax-flaction" value="round-off" checked/> <label for="flac-round-off">四捨五入</label>
-                    <input type="radio" id="flac-roud-up"   name="tax-flaction" value="roud-up"/> <label for="flac-roud-up">切上げ</label>
-                    <input type="radio" id="flac-truncate"  name="tax-flaction" value="truncate"/> <label for="flac-truncate">切捨て</label>
-                </div>
                 <div class="detail-title">
                     <p>No.</p>
                     <p>摘要</p>
                     <p>数量</p>
                     <p>単位</p>
-                    <p>税率</p>
                     <p>単価</p>
                     <p>金額</p>
                 </div>
             </div>
             <div class="totals">
-                <div class="form-data">
-                    <label for="total10">小計(10%)</label><input type="number" id="total10" name="total10" readonly/>
-                </div>
-                <div class="form-data">
-                    <label for="total8">小計(8%)</label><input type="number" id="total8" name="total8" readonly/>
-                </div>
-                <div class="form-data">
-                    <label for="tax10">税額(10%)</label><input type="number" id="tax10" name="tax10" readonly/>
-                </div>
-                <div class="form-data">
-                    <label for="tax8">税額(8%)</label><input type="number" id="tax8" name="tax8" readonly/>
-                </div>
                 <div class="form-data">
                     <label for="total">合計</label><input type="number" id="total" name="total" readonly/>
                 </div>
@@ -182,77 +134,27 @@
                 return !isNaN(value);
             }
             /**
-             * 税率が同じ金額を集計する。
-             * @param tax_rate 税率(8, 10)
+             * 金額を集計する。
              * @return 合計金額
              */
-            function _addAmountByTax(tax_rate) {
+            function _totalAmount() {
                 let total = 0;
                 let count = 0;
                 let elms = document.getElementsByClassName('detail-data');
                 try {
                     for (var index = 0; index < elms.length; ++index) {
                         var divElm = elms[index];
-                        var taxElm = _getDetailTaxRate(divElm);
-                        if (taxElm === null) continue;
-                        if (parseInt(taxElm.value) !== tax_rate) continue;
                         var amount = _getDetailAmountElement(divElm);
                         if (!_isNumber(amount.value)) continue;
                         total += parseInt(amount.value);
                         ++count;
                     }
-                    if (count > 0) return total;
-                    return null;
-                } catch (ex) {
-                    alert('税率での集計 : ' + ex);
-                }
-            }
-            function _taxFlaction(value) {
-                switch (_tax_info['tax-flaction']) {
-                    case 'round-off':   // 四捨五入
-                        return Math.round(value);
-                    case 'roud-up':     // 切上げ
-                        return Math.ceil(value);
-                    case 'truncate':    // 切捨て
-                        return Math.floor(value);
-                    default:
-                        return value;
-                }
-            }
-            function _taxByTotal(total, taxRate) {
-                let element = document.getElementById('tax' + taxRate);
-                if (total === null) {
-                    element.value = '';
-                    return null;
-                }
-                let tax = 0;
-                if (_tax_info['tax-inc'] === 'include') {           // 税込単価
-                    tax = total - total / ((100.0 + taxRate) / 100.0);
-                } else if (_tax_info['tax-inc'] === 'without') {    // 税抜単価
-                    tax = total * taxRate / 100.0;
-                }
-                tax = _taxFlaction(tax);
-                element.value = String(tax);
-                return tax;
-            }
-            function _totalByTaxRate(taxRate) {
-                let total = _addAmountByTax(taxRate);
-                let element = document.getElementById('total' + taxRate);
-                element.value = (total !== null ? String(total) : '');
-                return total;
-            }
-            function _calcTotal() {
-                try {
-                    let taxRateList = [10, 8];
-                    let total = 0;
-                    for (taxRate of taxRateList) {
-                        let a = _totalByTaxRate(taxRate);
-                        if (a !== null) total += a;
-                        let tax = _taxByTotal(a, taxRate);
-                        if ((tax !== null) && (_tax_info['tax-inc'] === 'without'))  total += tax;
-                    }
                     let element = document.getElementById('total');
-                    element.value = String(total);
+                    if (count > 0) {
+                        element.value = String(total);
+                    } else {
+                        element.value = '';
+                    }
                 } catch (ex) {
                     alert('合計計算 : ' + ex);
                 }
@@ -267,10 +169,6 @@
             }
             function _getDetailAmountElement(parent) {
                 let es = parent.getElementsByClassName('detail-amount');
-                return es[0];
-            }
-            function _getDetailTaxRate(parent) {
-                let es = parent.getElementsByClassName('tax-rate');
                 return es[0];
             }
             /**
@@ -299,7 +197,7 @@
                     // 金額を設定
                     v3e.value = String(v1 * v2);
                     // alert(v1 * v2 + '');
-                    _calcTotal();       // 合計欄の更新
+                    _totalAmount();       // 合計欄の更新
                 } catch(ex) {
                     alert('金額計算 : ' + ex);
                 }
@@ -311,32 +209,9 @@
                 if (className) elmt.classList.add(className);
                 return elmt;
             }
-            function _createTaxSelectorTag(id, name) {
-                let selectTag = document.createElement('select');
-                selectTag.name = name;
-                selectTag.id = id;
-                selectTag.classList.add('tax-rate');
-
-                let opt = document.createElement('option');
-                opt.value = 'none';
-                opt.appendChild(document.createTextNode(''));
-                selectTag.appendChild(opt);
-
-                opt = document.createElement('option');
-                opt.value = '10';
-                opt.appendChild(document.createTextNode('10%'));
-                selectTag.appendChild(opt);
-
-                opt = document.createElement('option');
-                opt.value = '8';
-                opt.appendChild(document.createTextNode('8%'));
-                selectTag.appendChild(opt);
-
-                return selectTag;
-            }
             function _makeDetailsTag() {
                 let parent = document.getElementById('bill-details');
-                for (let count = 1; count <= 10; ++count) {
+                for (let count = 1; count <= 4; ++count) {
                     let row = document.createElement('div');
                     row.classList.add('detail-data');
                     parent.appendChild(row);
@@ -355,10 +230,6 @@
                     // 単位
                     name = 'details[' + idxStr + '][unit_type]';
                     row.appendChild(_createInputTag("text", name, null));
-                    // 税率
-                    let id = 'tax-selector-' + ('0' + no).slice(-2);
-                    name = 'details[' + idxStr + '][tax-rate]';
-                    row.appendChild(_createTaxSelectorTag(id, name));
                     // 単価
                     name = 'details[' + idxStr + '][unit_amount]';
                     row.appendChild(_createInputTag("number", name, 'detail-unit-amount'));

@@ -5,13 +5,22 @@ import subprocess
 
 app = Flask(__name__)
 
+def getClientUri():
+    p = request.headers.getlist("Request-Path")
+    return '/' if len(p) == 0 else p[0]
+
 @app.route('/')
 def index():
-    return app.send_static_file('index.html')
+    data = {'request_uri': getClientUri()}
+    return render_template('index.html', data=data)
 
 @app.route('/b<string:pid>')
 def b_pid(pid):
-    return app.send_static_file('bill_sample' + pid + '.html')
+    u = getClientUri()
+    if u == '/':
+        u = '/b{}'.format(pid)
+    data = {'request_uri': u}
+    return render_template('bill_sample' + pid + '_inp.html', data=data)
 
 def _makePDF(html):
     hp = Path('./tmp/test.html')
