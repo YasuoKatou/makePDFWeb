@@ -4,6 +4,7 @@ from pathlib import Path
 import subprocess
 from datetime import datetime
 import uuid
+import json
 
 app = Flask(__name__)
 
@@ -17,7 +18,7 @@ def index():
     rt = render_template('index.html', data=data)
     uid = request.cookies.get('uid', None)
     if uid:
-        print('uid : {}'.format(uid))
+        #print('uid : {}'.format(uid))
         return rt
     uid = str(uuid.uuid4())
     resp = make_response(rt)
@@ -29,11 +30,13 @@ def index():
 @app.route('/b<string:pid>')
 def b_pid(pid):
     uid = request.cookies.get('uid', None)
-    print('uid : {}'.format(uid))
+    #print('uid : {}'.format(uid))
     u = getClientUri()
     if u == '/':
         u = '/b{}'.format(pid)
-    data = {'request_uri': u}
+    data = loadSession('b'+pid, uid)
+    data['request_uri'] = u
+
     return render_template('bill_sample' + pid + '_inp.html', data=data)
 
 def _makePDF(html):
@@ -58,7 +61,7 @@ _RE_DIM_CHECK_01 = re.compile(r'details\[(?P<index>\d+)\]\[(?P<key>\w+)+\]$')
 @app.route('/b<string:pid>/preview', methods=['POST'])
 def b001_preview(pid):
     uid = request.cookies.get('uid', None)
-    print('uid : {}'.format(uid))
+    saveSession('b'+pid, uid, request.form)
     dm = {}
     dm['details']= []
     for key, val in request.form.items():
@@ -87,6 +90,28 @@ def utility_processor():
     def format_date(dt):
         return dt.replace('-', '/')
     return dict(format_currency=format_currency, format_date=format_date)
+
+_PROJECT_ROOT = Path(__file__).parent
+def loadSession(pid, uid):
+    p = Path(_PROJECT_ROOT / 'cookies' / uid)
+    if p.exists():
+        s = p.read_text(encoding='utf-8')
+        j = json.loads(s)
+        if pid in j:
+            return j[pid]
+    return {}
+
+def saveSession(pid, uid, data):
+    p = Path(_PROJECT_ROOT / 'cookies')
+    p.mkdir(mode=0o777, parents=True, exist_ok=True)
+    p = Path(p / uid)
+    if p.exists():
+        s = p.read_text(encoding='utf-8')
+        d = json.loads(s)
+    else:
+        d = {}
+    d[pid] = data
+    p.write_text(json.dumps(d), encoding='utf-8')
 
 if __name__ == '__main__':
     app.run(port=8891, debug=True)

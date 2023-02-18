@@ -51,16 +51,16 @@
                         <label class="group-title">発行者情報</label>
                     </div>
                     <div class="form-data">
-                        <label for="data21">請求者名</label><input type="text" id="data21" name="data21">
+                        <label for="data21">請求者名</label><input type="text" id="data21" name="data21" value="{{ data.data21 }}"/>
                     </div>
                     <div class="form-data">
-                        <label for="data22">郵便番号</label><input type="text" id="data22" name="data22">
+                        <label for="data22">郵便番号</label><input type="text" id="data22" name="data22" value="{{ data.data22 }}"/>
                     </div>
                     <div class="form-data">
-                        <label for="data23">住　所</label><input type="text" id="data23" name="data23">
+                        <label for="data23">住　所</label><input type="text" id="data23" name="data23" value="{{ data.data23 }}"/>
                     </div>
                     <div class="form-data">
-                        <label for="data26">電話番号</label><input type="tel" id="data26" name="data26" pattern="[0-9]+-[0-9]+-[0-9]+">
+                        <label for="data26">電話番号</label><input type="tel" id="data26" name="data26" value="{{ data.data26 }}" pattern="[0-9]+-[0-9]+-[0-9]+"/>
                     </div>
                 </div>
                 <div class="data-group3">
@@ -68,10 +68,10 @@
                         <label class="group-title">振込先情報</label>
                     </div>
                     <div class="form-data">
-                        <label for="data31">金融機関名</label><input type="text" id="data31" name="data31">
+                        <label for="data31">金融機関名</label><input type="text" id="data31" name="data31" value="{{ data.data31 }}"/>
                     </div>
                     <div class="form-data">
-                        <label for="data32">支店名</label><input type="text" id="data32" name="data32">
+                        <label for="data32">支店名</label><input type="text" id="data32" name="data32" value="{{ data.data32 }}"/>
                     </div>
                     <div class="form-data">
                         <label for="data33">口座種別</label>
@@ -82,7 +82,7 @@
                         </select>
                     </div>
                     <div class="form-data">
-                        <label for="data34">口座番号</label><input type="text" id="data34" name="data34">
+                        <label for="data34">口座番号</label><input type="text" id="data34" name="data34" value="{{ data.data34 }}"/>
                     </div>
                 </div>
                 <div class="data-group1">
@@ -90,13 +90,13 @@
                         <label class="group-title">請求情報</label>
                     </div>
                     <div class="form-data">
-                        <label for="data11">請求先</label><input type="text" id="data11" name="data11">
+                        <label for="data11">請求先</label><input type="text" id="data11" name="data11" value="{{ data.data11 }}">
                     </div>
                     <div class="form-data">
-                        <label for="data13">発行日</label><input type="date" id="data13" name="data13">
+                        <label for="data13">発行日</label><input type="date" id="data13" name="data13" value="{{ data.data13 }}">
                     </div>
                     <div class="form-data">
-                        <label for="data14">支払期限</label><input type="date" id="data14" name="data14">
+                        <label for="data14">支払期限</label><input type="date" id="data14" name="data14" value="{{ data.data14 }}">
                     </div>
                 </div>
             </div>
@@ -242,11 +242,13 @@
             }
             window.onload = function() {
                 _makeDetailsTag();
+                /*
                 var today = new Date();
                 document.getElementById('data13').value =
                     today.getFullYear() + '-'
                     + ('0' + (today.getMonth()+1)).slice(-2) + '-'
                     + ('0' + today.getDate()).slice(-2);
+                */
                 // 数量
                 let elmts = document.getElementsByClassName('detail-number');
                 for (let idx = 0; idx < elmts.length; ++idx) {
