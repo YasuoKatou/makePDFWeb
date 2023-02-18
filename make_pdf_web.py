@@ -2,6 +2,8 @@ import re
 from flask import Flask, request, render_template, make_response
 from pathlib import Path
 import subprocess
+from datetime import datetime
+import uuid
 
 app = Flask(__name__)
 
@@ -12,10 +14,22 @@ def getClientUri():
 @app.route('/')
 def index():
     data = {'request_uri': getClientUri()}
-    return render_template('index.html', data=data)
+    rt = render_template('index.html', data=data)
+    uid = request.cookies.get('uid', None)
+    if uid:
+        print('uid : {}'.format(uid))
+        return rt
+    uid = str(uuid.uuid4())
+    resp = make_response(rt)
+    max_age = 60 * 60 * 24 * 120 # 120 days
+    expires = int(datetime.now().timestamp() + max_age)
+    resp.set_cookie('uid', value=uid, max_age=max_age, expires=expires)
+    return resp
 
 @app.route('/b<string:pid>')
 def b_pid(pid):
+    uid = request.cookies.get('uid', None)
+    print('uid : {}'.format(uid))
     u = getClientUri()
     if u == '/':
         u = '/b{}'.format(pid)
@@ -43,6 +57,8 @@ def _makePDF(html):
 _RE_DIM_CHECK_01 = re.compile(r'details\[(?P<index>\d+)\]\[(?P<key>\w+)+\]$')
 @app.route('/b<string:pid>/preview', methods=['POST'])
 def b001_preview(pid):
+    uid = request.cookies.get('uid', None)
+    print('uid : {}'.format(uid))
     dm = {}
     dm['details']= []
     for key, val in request.form.items():
