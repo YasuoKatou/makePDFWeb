@@ -76,9 +76,21 @@
                     <div class="form-data">
                         <label for="data33">口座種別</label>
                         <select id="data33" name="data33">
+                            {% if data.data33 == '普通' %}
                             <option value="普通" selected>普通</option>
+                            {% else %}
+                            <option value="普通">普通</option>
+                            {% endif %}
+                            {% if data.data33 == '当座' %}
+                            <option value="当座" selected>当座</option>
+                            {% else %}
                             <option value="当座">当座</option>
+                            {% endif %}
+                            {% if data.data33 == '総合' %}
+                            <option value="総合" selected>総合</option>
+                            {% else %}
                             <option value="総合">総合</option>
+                            {% endif %}
                         </select>
                     </div>
                     <div class="form-data">
@@ -112,10 +124,20 @@
                     <p>単価</p>
                     <p>金額</p>
                 </div>
+                {% for i in range(4) %}
+                <div class="detail-data">
+                    <p>{{ i + 1 }}</p>
+                    <input type="text" name="details[{{ i }}][name]" value="{{ data.details[i].name }}">
+                    <input type="number" name="details[{{ i }}][number]" class="detail-number" value="{{ data.details[i].number }}">
+                    <input type="text" name="details[{{ i }}][unit_type]" value="{{ data.details[i].unit_type }}">
+                    <input type="number" name="details[{{ i }}][unit_amount]" class="detail-unit-amount" value="{{ data.details[i].unit_amount }}">
+                    <input type="number" name="details[{{ i }}][amount]" class="detail-amount" value="{{ data.details[i].amount }}" readonly="">
+                </div>
+                {% endfor %}
             </div>
             <div class="totals">
                 <div class="form-data">
-                    <label for="total">合計</label><input type="number" id="total" name="total" readonly/>
+                    <label for="total">合計</label><input type="number" id="total" name="total" value="{{ data.total }}" readonly/>
                 </div>
             </div>
             <div class="ope_buttons">
@@ -202,53 +224,7 @@
                     alert('金額計算 : ' + ex);
                 }
             }
-            function _createInputTag(type, name, className) {
-                let elmt = document.createElement('input');
-                elmt.type = type;
-                elmt.name = name;
-                if (className) elmt.classList.add(className);
-                return elmt;
-            }
-            function _makeDetailsTag() {
-                let parent = document.getElementById('bill-details');
-                for (let count = 1; count <= 4; ++count) {
-                    let row = document.createElement('div');
-                    row.classList.add('detail-data');
-                    parent.appendChild(row);
-                    // No
-                    let no = String(count);
-                    let elmt = document.createElement('p');
-                    elmt.appendChild(document.createTextNode(no));
-                    row.appendChild(elmt);
-                    let idxStr = String(count-1);
-                    // 適用
-                    let name = 'details[' + idxStr + '][name]';
-                    row.appendChild(_createInputTag("text", name, null));
-                    // 数量
-                    name = 'details[' + idxStr + '][number]';
-                    row.appendChild(_createInputTag("number", name, 'detail-number'));
-                    // 単位
-                    name = 'details[' + idxStr + '][unit_type]';
-                    row.appendChild(_createInputTag("text", name, null));
-                    // 単価
-                    name = 'details[' + idxStr + '][unit_amount]';
-                    row.appendChild(_createInputTag("number", name, 'detail-unit-amount'));
-                    // 金額
-                    name = 'details[' + idxStr + '][amount]';
-                    elmt = _createInputTag("number", name, 'detail-amount');
-                    elmt.readOnly = true;
-                    row.appendChild(elmt);
-                }
-            }
             window.onload = function() {
-                _makeDetailsTag();
-                /*
-                var today = new Date();
-                document.getElementById('data13').value =
-                    today.getFullYear() + '-'
-                    + ('0' + (today.getMonth()+1)).slice(-2) + '-'
-                    + ('0' + today.getDate()).slice(-2);
-                */
                 // 数量
                 let elmts = document.getElementsByClassName('detail-number');
                 for (let idx = 0; idx < elmts.length; ++idx) {

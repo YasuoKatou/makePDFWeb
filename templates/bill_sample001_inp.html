@@ -54,25 +54,25 @@
                         <label class="group-title">発行者情報</label>
                     </div>
                     <div class="form-data">
-                        <label for="data21">請求者名</label><input type="text" id="data21" name="data21">
+                        <label for="data21">請求者名</label><input type="text" id="data21" name="data21" value="{{ data.data21 }}">
                     </div>
                     <div class="form-data">
-                        <label for="data22">郵便番号</label><input type="text" id="data22" name="data22">
+                        <label for="data22">郵便番号</label><input type="text" id="data22" name="data22" value="{{ data.data22 }}">
                     </div>
                     <div class="form-data">
-                        <label for="data23">住所１</label><input type="text" id="data23" name="data23">
+                        <label for="data23">住所１</label><input type="text" id="data23" name="data23" value="{{ data.data23 }}">
                     </div>
                     <div class="form-data">
-                        <label for="data24">住所２</label><input type="text" id="data24" name="data24">
+                        <label for="data24">住所２</label><input type="text" id="data24" name="data24" value="{{ data.data24 }}">
                     </div>
                     <div class="form-data">
-                        <label for="data25">住所３</label><input type="text" id="data25" name="data25">
+                        <label for="data25">住所３</label><input type="text" id="data25" name="data25" value="{{ data.data25 }}">
                     </div>
                     <div class="form-data">
-                        <label for="data26">電話番号</label><input type="tel" id="data26" name="data26" pattern="[0-9]+-[0-9]+-[0-9]+">
+                        <label for="data26">電話番号</label><input type="tel" id="data26" name="data26" value="{{ data.data26 }}" pattern="[0-9]+-[0-9]+-[0-9]+">
                     </div>
                     <div class="form-data">
-                        <label for="data27">担当</label><input type="text" id="data27" name="data27">
+                        <label for="data27">担当</label><input type="text" id="data27" name="data27" value="{{ data.data27 }}">
                     </div>
                 </div>
                 <div class="data-group3">
@@ -80,21 +80,33 @@
                         <label class="group-title">振込先情報</label>
                     </div>
                     <div class="form-data">
-                        <label for="data31">金融機関名</label><input type="text" id="data31" name="data31">
+                        <label for="data31">金融機関名</label><input type="text" id="data31" name="data31" value="{{ data.data31 }}">
                     </div>
                     <div class="form-data">
-                        <label for="data32">支店名</label><input type="text" id="data32" name="data32">
+                        <label for="data32">支店名</label><input type="text" id="data32" name="data32" value="{{ data.data32 }}">
                     </div>
                     <div class="form-data">
                         <label for="data33">口座種別</label>
                         <select id="data33" name="data33">
+                            {% if data.data33 == '普通' %}
                             <option value="普通" selected>普通</option>
+                            {% else %}
+                            <option value="普通">普通</option>
+                            {% endif %}
+                            {% if data.data33 == '当座' %}
+                            <option value="当座" selected>当座</option>
+                            {% else %}
                             <option value="当座">当座</option>
+                            {% endif %}
+                            {% if data.data33 == '総合' %}
+                            <option value="総合" selected>総合</option>
+                            {% else %}
                             <option value="総合">総合</option>
+                            {% endif %}
                         </select>
                     </div>
                     <div class="form-data">
-                        <label for="data34">口座番号</label><input type="text" id="data34" name="data34">
+                        <label for="data34">口座番号</label><input type="text" id="data34" name="data34" value="{{ data.data34 }}">
                     </div>
                 </div>
                 <div class="data-group1">
@@ -102,19 +114,19 @@
                         <label class="group-title">請求情報</label>
                     </div>
                     <div class="form-data">
-                        <label for="data11">請求先</label><input type="text" id="data11" name="data11">
+                        <label for="data11">請求先</label><input type="text" id="data11" name="data11" value="{{ data.data11 }}">
                     </div>
                     <div class="form-data">
-                        <label for="data12">請求No</label><input type="text" id="data12" name="data12">
+                        <label for="data12">請求No</label><input type="text" id="data12" name="data12" value="{{ data.data12 }}">
                     </div>
                     <div class="form-data">
-                        <label for="data13">請求日</label><input type="date" id="data13" name="data13">
+                        <label for="data13">請求日</label><input type="date" id="data13" name="data13" value="{{ data.data13 }}">
                     </div>
                     <div class="form-data">
-                        <label for="data14">支払期限</label><input type="date" id="data14" name="data14">
+                        <label for="data14">支払期限</label><input type="date" id="data14" name="data14" value="{{ data.data14 }}">
                     </div>
                     <div class="form-data">
-                        <label for="data15">件名</label><input type="text" id="data15" name="data15">
+                        <label for="data15">件名</label><input type="text" id="data15" name="data15" value="{{ data.data15 }}">
                     </div>
                 </div>
             </div>
@@ -130,14 +142,31 @@
                 </div>
                 <div class="form-data2">
                     <label>単価</label>
+                    {% if data['tax-inc'] == 'include' %}
                     <input type="radio" id="with-tax"    name="tax-inc" value="include" checked/> <label for="with-tax">税込み</label>
                     <input type="radio" id="without-tax" name="tax-inc" value="without"/> <label for="without-tax">税抜き</label>
+                    {% else %}
+                    <input type="radio" id="with-tax"    name="tax-inc" value="include"/> <label for="with-tax">税込み</label>
+                    <input type="radio" id="without-tax" name="tax-inc" value="without" checked/> <label for="without-tax">税抜き</label>
+                    {% endif %}
                 </div>
                 <div class="form-data2">
                     <label>税の端数処理</label>
+                    {% if data['tax-flaction'] == 'round-off' %}
                     <input type="radio" id="flac-round-off" name="tax-flaction" value="round-off" checked/> <label for="flac-round-off">四捨五入</label>
                     <input type="radio" id="flac-roud-up"   name="tax-flaction" value="roud-up"/> <label for="flac-roud-up">切上げ</label>
                     <input type="radio" id="flac-truncate"  name="tax-flaction" value="truncate"/> <label for="flac-truncate">切捨て</label>
+                    {% endif %}
+                    {% if data['tax-flaction'] == 'roud-up' %}
+                    <input type="radio" id="flac-round-off" name="tax-flaction" value="round-off"/> <label for="flac-round-off">四捨五入</label>
+                    <input type="radio" id="flac-roud-up"   name="tax-flaction" value="roud-up" checked/> <label for="flac-roud-up">切上げ</label>
+                    <input type="radio" id="flac-truncate"  name="tax-flaction" value="truncate"/> <label for="flac-truncate">切捨て</label>
+                    {% endif %}
+                    {% if data['tax-flaction'] == 'truncate' %}
+                    <input type="radio" id="flac-round-off" name="tax-flaction" value="round-off"/> <label for="flac-round-off">四捨五入</label>
+                    <input type="radio" id="flac-roud-up"   name="tax-flaction" value="roud-up"/> <label for="flac-roud-up">切上げ</label>
+                    <input type="radio" id="flac-truncate"  name="tax-flaction" value="truncate" checked/> <label for="flac-truncate">切捨て</label>
+                    {% endif %}
                 </div>
                 <div class="detail-title">
                     <p>No.</p>
@@ -148,22 +177,45 @@
                     <p>単価</p>
                     <p>金額</p>
                 </div>
+                {% for i in range(10) %}
+                <div class="detail-data">
+                    <p>{{ i + 1 }}</p>
+                    <input type="text" name="details[{{ i }}][name]" value="{{ data.details[i].name }}">
+                    <input type="number" name="details[{{ i }}][number]" class="detail-number" value="{{ data.details[i].number }}">
+                    <input type="text" name="details[{{ i }}][unit_type]" value="{{ data.details[i].unit_type }}">
+                    <select name="details[{{ i }}][tax-rate]" id="tax-selector-01" class="tax-rate">
+                        <option value="none"></option>
+                        {% if data.details[i]['tax-rate'] == '10' %}
+                        <option value="10" selected>10%</option>
+                        {% else %}
+                        <option value="10">10%</option>
+                        {% endif %}
+                        {% if data.details[i]['tax-rate'] == '8' %}
+                        <option value="8" selected>8%</option>
+                        {% else %}
+                        <option value="8">8%</option>
+                        {% endif %}
+                    </select>
+                    <input type="number" name="details[{{ i }}][unit_amount]" class="detail-unit-amount" value="{{ data.details[i].unit_amount }}">
+                    <input type="number" name="details[{{ i }}][amount]" class="detail-amount" value="{{ data.details[i].amount }}" readonly="">
+                </div>
+                {% endfor %}
             </div>
             <div class="totals">
                 <div class="form-data">
-                    <label for="total10">小計(10%)</label><input type="number" id="total10" name="total10" readonly/>
+                    <label for="total10">小計(10%)</label><input type="number" id="total10" name="total10" value="{{ data.total10 }}" readonly/>
                 </div>
                 <div class="form-data">
-                    <label for="total8">小計(8%)</label><input type="number" id="total8" name="total8" readonly/>
+                    <label for="total8">小計(8%)</label><input type="number" id="total8" name="total8" value="{{ data.total8 }}" readonly/>
                 </div>
                 <div class="form-data">
-                    <label for="tax10">税額(10%)</label><input type="number" id="tax10" name="tax10" readonly/>
+                    <label for="tax10">税額(10%)</label><input type="number" id="tax10" name="tax10" value="{{ data.tax10 }}" readonly/>
                 </div>
                 <div class="form-data">
-                    <label for="tax8">税額(8%)</label><input type="number" id="tax8" name="tax8" readonly/>
+                    <label for="tax8">税額(8%)</label><input type="number" id="tax8" name="tax8" value="{{ data.tax8 }}" readonly/>
                 </div>
                 <div class="form-data">
-                    <label for="total">合計</label><input type="number" id="total" name="total" readonly/>
+                    <label for="total">合計</label><input type="number" id="total" name="total" value="{{ data.total }}" readonly/>
                 </div>
             </div>
             <div class="ope_buttons">
@@ -304,78 +356,7 @@
                     alert('金額計算 : ' + ex);
                 }
             }
-            function _createInputTag(type, name, className) {
-                let elmt = document.createElement('input');
-                elmt.type = type;
-                elmt.name = name;
-                if (className) elmt.classList.add(className);
-                return elmt;
-            }
-            function _createTaxSelectorTag(id, name) {
-                let selectTag = document.createElement('select');
-                selectTag.name = name;
-                selectTag.id = id;
-                selectTag.classList.add('tax-rate');
-
-                let opt = document.createElement('option');
-                opt.value = 'none';
-                opt.appendChild(document.createTextNode(''));
-                selectTag.appendChild(opt);
-
-                opt = document.createElement('option');
-                opt.value = '10';
-                opt.appendChild(document.createTextNode('10%'));
-                selectTag.appendChild(opt);
-
-                opt = document.createElement('option');
-                opt.value = '8';
-                opt.appendChild(document.createTextNode('8%'));
-                selectTag.appendChild(opt);
-
-                return selectTag;
-            }
-            function _makeDetailsTag() {
-                let parent = document.getElementById('bill-details');
-                for (let count = 1; count <= 10; ++count) {
-                    let row = document.createElement('div');
-                    row.classList.add('detail-data');
-                    parent.appendChild(row);
-                    // No
-                    let no = String(count);
-                    let elmt = document.createElement('p');
-                    elmt.appendChild(document.createTextNode(no));
-                    row.appendChild(elmt);
-                    let idxStr = String(count-1);
-                    // 適用
-                    let name = 'details[' + idxStr + '][name]';
-                    row.appendChild(_createInputTag("text", name, null));
-                    // 数量
-                    name = 'details[' + idxStr + '][number]';
-                    row.appendChild(_createInputTag("number", name, 'detail-number'));
-                    // 単位
-                    name = 'details[' + idxStr + '][unit_type]';
-                    row.appendChild(_createInputTag("text", name, null));
-                    // 税率
-                    let id = 'tax-selector-' + ('0' + no).slice(-2);
-                    name = 'details[' + idxStr + '][tax-rate]';
-                    row.appendChild(_createTaxSelectorTag(id, name));
-                    // 単価
-                    name = 'details[' + idxStr + '][unit_amount]';
-                    row.appendChild(_createInputTag("number", name, 'detail-unit-amount'));
-                    // 金額
-                    name = 'details[' + idxStr + '][amount]';
-                    elmt = _createInputTag("number", name, 'detail-amount');
-                    elmt.readOnly = true;
-                    row.appendChild(elmt);
-                }
-            }
             window.onload = function() {
-                _makeDetailsTag();
-                var today = new Date();
-                document.getElementById('data13').value =
-                    today.getFullYear() + '-'
-                    + ('0' + (today.getMonth()+1)).slice(-2) + '-'
-                    + ('0' + today.getDate()).slice(-2);
                 // 数量
                 let elmts = document.getElementsByClassName('detail-number');
                 for (let idx = 0; idx < elmts.length; ++idx) {

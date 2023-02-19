@@ -57,11 +57,9 @@ def _makePDF(html):
     r.mimetype = 'application/pdf'
     return r
 
-_RE_DIM_CHECK_01 = re.compile(r'details\[(?P<index>\d+)\]\[(?P<key>\w+)+\]$')
+_RE_DIM_CHECK_01 = re.compile(r'details\[(?P<index>\d+)\]\[(?P<key>\S+)+\]$')
 @app.route('/b<string:pid>/preview', methods=['POST'])
 def b001_preview(pid):
-    uid = request.cookies.get('uid', None)
-    saveSession('b'+pid, uid, request.form)
     dm = {}
     dm['details']= []
     for key, val in request.form.items():
@@ -75,6 +73,8 @@ def b001_preview(pid):
         else:
             dm[key] = val
             #print('{}: {}'.format(key, val))
+    uid = request.cookies.get('uid', None)
+    saveSession('b'+pid, uid, dm)
 
     r = render_template('bill_sample' + pid + '.html', data=dm)
     #print(str(r))
