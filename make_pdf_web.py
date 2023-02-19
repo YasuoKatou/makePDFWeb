@@ -6,6 +6,12 @@ from datetime import datetime
 import uuid
 import json
 
+_PROJECT_ROOT = Path(__file__).parent
+_TMP_PATH = Path(_PROJECT_ROOT / 'tmp')
+_TMP_PATH.mkdir(mode=0o777, parents=True, exist_ok=True)
+_COOKIES_PATH = Path(_PROJECT_ROOT / 'cookies')
+_COOKIES_PATH.mkdir(mode=0o777, parents=True, exist_ok=True)
+
 app = Flask(__name__)
 
 def getClientUri():
@@ -39,21 +45,22 @@ def b_pid(pid):
 
     return render_template('bill_sample' + pid + '_inp.html', data=data)
 
-def _makePDF(html):
-    hp = Path('./tmp/test.html')
-    hp.parent.mkdir(parents=True, exist_ok=True)
-    with hp.open(mode='w', encoding='utf-8') as f:
-        f.write(html)
+def _makePDF(html, uid):
+    hp = Path(_TMP_PATH / (uid + '.html'))
+    hp.write_text(html, encoding='utf-8')
 
+    pp = Path(_TMP_PATH / (uid + '.pdf'))
     cmd = [
         'wkhtmltopdf',
-        './tmp/test.html',
-        './tmp/test.pdf',
+        '--disable-smart-shrinking',
+        str(hp.absolute()),
+        str(pp.absolute()),
     ]
     subprocess.run(cmd, capture_output=True, text=True)
 
     r = make_response()
-    r.data = open('./tmp/test.pdf', 'rb').read()
+    with pp.open(mode='rb') as f:
+        r.data = f.read()
     r.mimetype = 'application/pdf'
     return r
 
@@ -81,7 +88,7 @@ def b001_preview(pid):
     if 'preview' in dm:
         print('PDF : {}'.format(dm['preview']))
         return r
-    return _makePDF(r)
+    return _makePDF(r, uid)
 
 @app.context_processor
 def utility_processor():
@@ -91,7 +98,6 @@ def utility_processor():
         return dt.replace('-', '/')
     return dict(format_currency=format_currency, format_date=format_date)
 
-_PROJECT_ROOT = Path(__file__).parent
 def loadSession(pid, uid):
     p = Path(_PROJECT_ROOT / 'cookies' / uid)
     if p.exists():
@@ -102,9 +108,7 @@ def loadSession(pid, uid):
     return {}
 
 def saveSession(pid, uid, data):
-    p = Path(_PROJECT_ROOT / 'cookies')
-    p.mkdir(mode=0o777, parents=True, exist_ok=True)
-    p = Path(p / uid)
+    p = Path(_COOKIES_PATH / uid)
     if p.exists():
         s = p.read_text(encoding='utf-8')
         d = json.loads(s)

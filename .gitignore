@@ -130,3 +130,4 @@ dmypy.json
 
 # ap data
 cookies/
+tmp/
