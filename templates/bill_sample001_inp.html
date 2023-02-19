@@ -177,27 +177,33 @@
                     <p>単価</p>
                     <p>金額</p>
                 </div>
+                {% if data.details is defined %}
+                {% set detail_rows = data.details %}
+                {% else %}
+                {% set detail_rows = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}] %}
+                {% endif %}
+
                 {% for i in range(10) %}
                 <div class="detail-data">
                     <p>{{ i + 1 }}</p>
-                    <input type="text" name="details[{{ i }}][name]" value="{{ data.details[i].name }}">
-                    <input type="number" name="details[{{ i }}][number]" class="detail-number" value="{{ data.details[i].number }}">
-                    <input type="text" name="details[{{ i }}][unit_type]" value="{{ data.details[i].unit_type }}">
+                    <input type="text" name="details[{{ i }}][name]" value="{{ detail_rows[i].name }}">
+                    <input type="number" name="details[{{ i }}][number]" class="detail-number" value="{{ detail_rows[i].number }}">
+                    <input type="text" name="details[{{ i }}][unit_type]" value="{{ detail_rows[i].unit_type }}">
                     <select name="details[{{ i }}][tax-rate]" id="tax-selector-01" class="tax-rate">
                         <option value="none"></option>
-                        {% if data.details[i]['tax-rate'] == '10' %}
+                        {% if detail_rows[i]['tax-rate'] == '10' %}
                         <option value="10" selected>10%</option>
                         {% else %}
                         <option value="10">10%</option>
                         {% endif %}
-                        {% if data.details[i]['tax-rate'] == '8' %}
+                        {% if detail_rows[i]['tax-rate'] == '8' %}
                         <option value="8" selected>8%</option>
                         {% else %}
                         <option value="8">8%</option>
                         {% endif %}
                     </select>
-                    <input type="number" name="details[{{ i }}][unit_amount]" class="detail-unit-amount" value="{{ data.details[i].unit_amount }}">
-                    <input type="number" name="details[{{ i }}][amount]" class="detail-amount" value="{{ data.details[i].amount }}" readonly="">
+                    <input type="number" name="details[{{ i }}][unit_amount]" class="detail-unit-amount" value="{{ detail_rows[i].unit_amount }}">
+                    <input type="number" name="details[{{ i }}][amount]" class="detail-amount" value="{{ detail_rows[i].amount }}" readonly="">
                 </div>
                 {% endfor %}
             </div>

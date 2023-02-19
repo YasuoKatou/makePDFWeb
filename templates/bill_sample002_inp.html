@@ -124,14 +124,20 @@
                     <p>単価</p>
                     <p>金額</p>
                 </div>
+                {% if data.details is defined %}
+                {% set detail_rows = data.details %}
+                {% else %}
+                {% set detail_rows = [{}, {}, {}, {}] %}
+                {% endif %}
+
                 {% for i in range(4) %}
                 <div class="detail-data">
                     <p>{{ i + 1 }}</p>
-                    <input type="text" name="details[{{ i }}][name]" value="{{ data.details[i].name }}">
-                    <input type="number" name="details[{{ i }}][number]" class="detail-number" value="{{ data.details[i].number }}">
-                    <input type="text" name="details[{{ i }}][unit_type]" value="{{ data.details[i].unit_type }}">
-                    <input type="number" name="details[{{ i }}][unit_amount]" class="detail-unit-amount" value="{{ data.details[i].unit_amount }}">
-                    <input type="number" name="details[{{ i }}][amount]" class="detail-amount" value="{{ data.details[i].amount }}" readonly="">
+                    <input type="text" name="details[{{ i }}][name]" value="{{ detail_rows[i].name }}">
+                    <input type="number" name="details[{{ i }}][number]" class="detail-number" value="{{ detail_rows[i].number }}">
+                    <input type="text" name="details[{{ i }}][unit_type]" value="{{ detail_rows[i].unit_type }}">
+                    <input type="number" name="details[{{ i }}][unit_amount]" class="detail-unit-amount" value="{{ detail_rows[i].unit_amount }}">
+                    <input type="number" name="details[{{ i }}][amount]" class="detail-amount" value="{{ detail_rows[i].amount }}" readonly="">
                 </div>
                 {% endfor %}
             </div>
