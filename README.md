@@ -22,3 +22,35 @@
 
 ## 利用規定
 本ソフトの利用により発生した障害およびトラブルについては、一切の責任は負わないものとする。
+
+## uwsgi 設定例 (uwsgi.ini)
+```
+[uwsgi]
+base = プロジェクトへのパス/makePDFWeb
+module = make_pdf_web:app
+
+pythonpath = %(base)
+
+callable = app
+plugin = /usr/lib/uwsgi/plugins/python3_plugin.so
+logto = ログのパス/make_pdf_web.log
+
+master = true
+processes = 1
+threads = 1
+http-socket = :8089
+vacuum = true
+pidfile = /run/user/uwsgi.pid
+```
+
+## nginx 設定例 (/etc/nginx/sites-available/default)
+```
+location ~ ^/make_pdf/.*$ {
+        rewrite ^/make_pdf/(.*)$ /$1 break;
+        include uwsgi_params;
+        proxy_pass http://127.0.0.1:8089;
+        proxy_set_header X-Forwarded-For $host;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Request-Path $request_uri;
+}
+```
