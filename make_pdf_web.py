@@ -1,10 +1,10 @@
 import re
 from flask import Flask, request, render_template, make_response
 from pathlib import Path
-import subprocess
 from datetime import datetime
 import uuid
 import json
+import pdfkit
 
 _PROJECT_ROOT = Path(__file__).parent
 _TMP_PATH = Path(_PROJECT_ROOT / 'tmp')
@@ -46,17 +46,22 @@ def b_pid(pid):
     return render_template('bill_sample' + pid + '_inp.html', data=data)
 
 def _makePDF(html, uid):
-    hp = Path(_TMP_PATH / (uid + '.html'))
-    hp.write_text(html, encoding='utf-8')
-
     pp = Path(_TMP_PATH / (uid + '.pdf'))
-    cmd = [
-        'wkhtmltopdf',
-        '--disable-smart-shrinking',
-        str(hp.absolute()),
-        str(pp.absolute()),
-    ]
-    subprocess.run(cmd, capture_output=True, text=True)
+    opt = {
+        'page-size': 'A4',
+        'page-height': '297mm',
+        'page-width': '210mm',
+        'orientation': 'Portrait',
+        'disable-smart-shrinking': None,
+        'margin-bottom': '0mm',
+        'margin-left': '0mm',
+        'margin-right': '0mm',
+        'margin-top': '0mm',
+        'no-pdf-compression': None,
+        'no-outline': None,
+        'encoding': 'UTF-8',
+    }
+    pdfkit.from_string(html, str(pp.absolute()), options=opt)
 
     r = make_response()
     with pp.open(mode='rb') as f:
