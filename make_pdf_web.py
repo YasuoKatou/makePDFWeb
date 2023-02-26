@@ -47,19 +47,21 @@ def b_pid(pid):
 
 def _makePDF(html, uid):
     pp = Path(_TMP_PATH / (uid + '.pdf'))
-    opt = {
-        'page-size': 'A4',
+    '''
         'page-height': '297mm',
         'page-width': '210mm',
+        'no-pdf-compression': None,
+        'no-outline': None,
+        'encoding': 'UTF-8',
+    '''
+    opt = {
+        'page-size': 'A4',
         'orientation': 'Portrait',
-        'disable-smart-shrinking': None,
         'margin-bottom': '0mm',
         'margin-left': '0mm',
         'margin-right': '0mm',
         'margin-top': '0mm',
-        'no-pdf-compression': None,
-        'no-outline': None,
-        'encoding': 'UTF-8',
+        'disable-smart-shrinking': None,
     }
     pdfkit.from_string(html, str(pp.absolute()), options=opt)
 
