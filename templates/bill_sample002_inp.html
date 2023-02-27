@@ -206,28 +206,37 @@
              */
             function _calcAmount(target, isNum) {
                 try {
-                    // 入力を行った要素の値を取得
-                    let v1s = target.value;
-                    if (!_isNumber(v1s)) return;
-                    let v1 = parseInt(v1s);
                     let elm;
                     let parent = target.parentNode;
+                    // 入力を行った要素の値を取得
+                    let v1s = target.value;
+                    if (!_isNumber(v1s)) {
+                        elm = _getDetailAmountElement(parent);
+                        if (elm) elm.value = '';
+                        return;
+                    }
+                    let v1 = parseInt(v1s);
                     if (isNum) {    // 数量の入力の場合、単価の入力要素を決定
                         elm = _getDetailUnitAmountElement(parent);
                     } else {        // 単価の入力を行った場合、数量の入力要素を決定
                         elm = _getDetailNumberElement(parent);
                     }
                     let v2s = elm.value;
-                    if (!_isNumber(v2s)) return;
+                    if (!_isNumber(v2s)) {
+                        elm = _getDetailAmountElement(parent);
+                        if (elm) elm.value = '';
+                        return;
+                    }
                     let v2 = parseInt(v2s);
                     // 金額の入力要素を決定
                     var v3e = _getDetailAmountElement(parent);
                     // 金額を設定
                     v3e.value = String(v1 * v2);
                     // alert(v1 * v2 + '');
-                    _totalAmount();       // 合計欄の更新
                 } catch(ex) {
                     alert('金額計算 : ' + ex);
+                } finally {
+                    _totalAmount();       // 合計欄の更新
                 }
             }
             window.onload = function() {

@@ -29,6 +29,7 @@
             div.exp01 {padding-top: 1em; clear: left;}
             div.exp01 > p:nth-child(1) {font-size: 11pt;}
             div.exp01 > p:nth-child(2) {margin-top: 5em; font-size: 12pt;}
+            div.bill-detail-header {height: 3em;}
             div.bill-detail-header > p {float: left;
                 height: 40px; line-height: 3em; font-size: 10pt;
                 font-weight: bolder; text-align: center;}
@@ -39,7 +40,7 @@
             div.bill-detail-header > p:nth-child(2), div.bill-details > p:nth-child(2) {width: 65px;}
             div.bill-detail-header > p:nth-child(3), div.bill-details > p:nth-child(3) {width: 105px;}
             div.bill-detail-header > p:nth-child(4), div.bill-details > p:nth-child(4) {width: 105px;}
-            div.bill-details {font-size: 11px;}
+            div.bill-details {font-size: 11px; height: 3.2em;}
             div.bill-details > p {float: left;}
             div.bill-details > p:nth-child(1) {text-align: left; padding-left: 1em;}
             div.bill-details > p:nth-child(2) {text-align: right; padding-right: 1em;}
@@ -63,7 +64,7 @@
             div.supplier > p:nth-child(1) {font-size: 13pt;}
             div.supplier > p:nth-child(2) {padding-left: 1em; font-size: 10.5pt;}
             div.supplier > p:nth-child(3), div.supplier > p:nth-child(4) {padding-left: 2em; font-size: 10.5pt;}
-            div.bank {font-size: 12pt; margin-top: 20em;}
+            div.bank {font-size: 12pt; margin-top: 5em;}
             div.bank01, div.bank02 {float: right;}
             p.bank-info-title {padding-right: 2em;}
         </style>
@@ -107,10 +108,26 @@
                 </div>
                 {% for detail in data.details %}
                 <div class="bill-details">
+                    {% if detail.name == '' %}
+                    <p>&nbsp;</p>
+                    {% else %}
                     <p>{{ detail.name }}</p>
+                    {% endif %}
+                    {% if detail.number == '' and detail.unit_type == '' %}
+                    <p>&nbsp;</p>
+                    {% else %}
                     <p>{{ format_currency(detail.number) }} {{ detail.unit_type }}</p>
+                    {% endif %}
+                    {% if detail.unit_amount == '' %}
+                    <p>&nbsp;</p>
+                    {% else %}
                     <p>{{ format_currency(detail.unit_amount) }}</p>
+                    {% endif %}
+                    {% if detail.amount == '' %}
+                    <p>&nbsp;</p>
+                    {% else %}
                     <p>{{ format_currency(detail.amount) }}</p>
+                    {% endif %}
                 </div>
                 {% endfor %}
                 <div class="bill-list-sum">
