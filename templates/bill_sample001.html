@@ -12,61 +12,58 @@
                 padding: 20mm;
             }
             h1 {display: block; text-align: center; font-size: x-large; text-decoration: underline;}
-            div.header100 {
-                margin-top: 20mm;
-                display: flex; flex-direction: row; justify-content: space-between;}
-            div.header110 {display: flex; flex-direction: column;}
+            div.header100 {margin-top: 20mm; overflow: hidden;}
+            div.header100 > div:nth-child(1) {float: left;}
+            div.header100 > div:nth-child(2) {float: right;}
             p.right-align {text-align: right;}
             p.bill-dist {font-size: larger;}
             p.bill-dist::after {content: "御中";}
-            div.bill-contents {
-                margin-top: 10mm;
-                display: flex; flex-direction: row; justify-content: space-between;}
+            div.bill-contents {margin-top: 10mm;}
+            div.bill-contents > div:nth-child(1) {float: left;}
+            div.bill-contents > div:nth-child(2) {float: right;}
             div.bill-contents > div:first-child > p:first-child {
                 margin-bottom: 2mm;
             }
-            div.bill-contents-left10 {display: flex; flex-direction: row;}
-            p.title01+p {padding-left: 0.5em; border-bottom: 1px solid black; width: 25em;}
-            div.bill-contents-left10:not(first-child) {margin-bottom: 1mm;}
-            p.title01 { border-bottom: 1px solid black;
-                font-weight: bolder;
-                width: 6em; text-align: right;}
-            div.bill-amount {
-                height: 4em; display: flex; flex-direction: row;}
-            div.bill-amount p {line-height: 4em;}
-            div.bill-amount11 {
-                border-bottom: 1px solid black; width: 25em;
-                height: 4em; display: flex; flex-direction: row;}
-            div.bill-amount11 > p:nth-child(1) {padding-left: 0.5em; line-height: 2.5em; font-size: large;}
-            div.bill-detail-header {
-                margin-top: 10mm;
-                display: flex; flex-direction: row;}
-            div.bill-detail-header > p {
+            div.bill-contents-left10 {overflow: hidden; border-bobill-detailttom: 1px solid black;}
+            div.bill-contents-left10 > p {float: left; height: 100%; }
+            div.bill-contents-left10:not(:last-child) > p {line-height: 2.5em;}
+            div.bill-contents-left10:not(:last-child) {height: 2.5em;}
+            div.bill-contents-left10:last-child {height: 4em;}
+            div.bill-contents-left10:last-child > p {line-height: 2em;}
+            p.title01+p {padding-left: 0.5em; width: 300px;}
+            p.title01 {font-weight: bolder; width: 6em; text-align: right;}
+            div.bill-amount {clear: both; height: 48px; width: 372px; border-bottom: 1px solid black;}
+            div.bill-amount p {line-height: 48px; float: left;}
+            div.bill-amount p:nth-child(2) {width: 300px; font-size: large;}
+            div.bill-amount p:nth-child(2)::after {font-size: small; content: " 円（税込）"}
+            div.bill-detail-header {margin-top: 10mm;}
+            div.bill-detail-header > p {float: left;
                 height: 2em; line-height: 2em;
                 font-weight: bolder; text-align: center;}
             div.bill-detail-header > p:not(:last-child) {border-color: black; border-style: solid; border-width: 1px 0px 1px 1px;}
             div.bill-detail-header > p:last-child {border: 1px solid black;}
-            div.bill-detail-header > p:nth-child(1), div.bill-detail > p:nth-child(1) {flex-grow: 1;}
-            div.bill-detail-header > p:nth-child(2), div.bill-detail > p:nth-child(2) {width: 5em;}
-            div.bill-detail-header > p:nth-child(3), div.bill-detail > p:nth-child(3) {width: 5em;}
-            div.bill-detail-header > p:nth-child(4), div.bill-detail > p:nth-child(4) {width: 8em;}
-            div.bill-detail-header > p:nth-child(5), div.bill-detail > p:nth-child(5) {width: 8em;}
+            div.bill-detail-header > p:nth-child(1), div.bill-detail > p:nth-child(1) {width: 320px;}
+            div.bill-detail-header > p:nth-child(2), div.bill-detail > p:nth-child(2) {width: 60px;}
+            div.bill-detail-header > p:nth-child(3), div.bill-detail > p:nth-child(3) {width: 60px;}
+            div.bill-detail-header > p:nth-child(4), div.bill-detail > p:nth-child(4) {width: 96px;}
+            div.bill-detail-header > p:nth-child(5), div.bill-detail > p:nth-child(5) {width: 96px;}
+            div.bill-detail > p {float: left;}
             div.bill-detail > p:nth-child(1) {text-align: left; padding-left: 1em;}
             div.bill-detail > p:nth-child(2) {text-align: right; padding-right: 1em;}
             div.bill-detail > p:nth-child(3) {text-align: center;}
             div.bill-detail > p:nth-child(4) {text-align: right; padding-right: 1em;}
             div.bill-detail > p:nth-child(5) {text-align: right; padding-right: 1em;}
-            div.bill-detail {display: flex; flex-direction: row;}
+            div.bill-detail {clear: both;}
             div.bill-detail > p:not(:last-child) {
                 height: 3em; border-left: 1px solid black; border-bottom: 1px solid black;}
             div.bill-detail > p:last-child {
                 height: 3em; border-left: 1px solid black; border-bottom: 1px solid black; border-right: 1px solid black;}
             div.bill-detail > p {line-height: 3.2em;}
-            div.bill-list-sum {display: flex; flex-direction: row;}
-            div.bill-list-sum > p {height: 2em; line-height: 2.2em;}
+            div.bill-list-sum {clear: both;}
+            div.bill-list-sum > p {height: 2em; line-height: 2.2em; float: left;}
+            div.bill-list-sum > p:nth-child(1) {width: 440px;}
             div.bill-list-sum > p:nth-child(2) {border-left: 1px solid black; border-bottom: 1px solid black;}
             div.bill-list-sum > p:nth-child(3) {border-color: black; border-style: solid; border-width: 0px 1px 1px 1px;}
-            div.bill-list-sum > p:nth-child(1) {flex-grow: 1;}
             div.bill-list-sum > p:nth-child(2) {width: 8em; font-weight: bolder;
                  text-align: right; padding-right: 1em;}
             div.bill-list-sum > p:nth-child(3) {width: 8em; text-align: right; padding-right: 1em;}
@@ -84,7 +81,7 @@
                 <div>
                      <p class="bill-dist">{{ data.data11 }}&nbsp;</p>
                 </div>
-                <div class="header110">
+                <div>
                     <p class="right-align doc-no">{{ data.data12 }}</p>
                     <p>請求日 {{ format_date(data.data13) }}</p>
                 </div>
@@ -117,11 +114,7 @@
             </div>
             <div class="bill-amount">
                 <p class="title01">合計金額</p>
-                <div class="bill-amount11">
-                    <p>{{ format_currency(data.total) }}</p>
-                    <p>&nbsp;円</p>
-                    <p>（税込）</p>
-                </div>
+                <p>{{ format_currency(data.total) }}</p>
             </div>
             <div class="bill-detail-header">
                 <p>摘要</p>
