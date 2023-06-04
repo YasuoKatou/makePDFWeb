@@ -45,6 +45,12 @@ def b_pid(pid):
 
     return render_template('bill_sample' + pid + '_inp.html', data=data)
 
+@app.route('/x<string:pid>')
+def x_pid(pid):
+    fstem = 'wkhtmltopdf_sample' + pid
+    r = render_template(fstem + '.html')
+    return _makePDF(r, fstem)
+
 def _makePDF(html, uid):
     pp = Path(_TMP_PATH / (uid + '.pdf'))
     '''
