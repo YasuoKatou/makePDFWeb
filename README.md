@@ -14,12 +14,15 @@
 * 入力データの自動保存（クッキー使用時のみ）
 
 ## 課題
-* PDF出力の実装（ブラウザの機能でPDFは可能ですが、操作が煩雑です）
-* Windows版のwkhtmltopdfの実装を行ったがレイアウトが崩れる
+* 2023/10から始まる予定のインボイス対応
 
 ### 使用しているパッケージ
-* Flask (2.2.3)
-* wkhtmltopdf (ubuntu:0.12.6)
+* Flask (2.3.2)
+* pdfkit（1.0.0）
+* wkhtmltopdf (wkhtmltopdf 0.12.6.1 (with patched qt)) *1
+
+*1：Termuxのubuntuでインストールする場合、```apt wkhtmltopdf``` でインストールしてはダメ
+本家のサイトからDEBファイルをDLしてインストール（```sudo apt install -y ./wkhtmltox_0.12.6.1-2.jammy_arm64.deb```）すること。
 
 ## 利用規定
 本ソフトの利用により発生した障害およびトラブルについては、一切の責任は負わないものとする。
